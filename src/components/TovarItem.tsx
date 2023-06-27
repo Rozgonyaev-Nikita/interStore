@@ -30,7 +30,7 @@ export const TovarItem: FC<ITovarItem> = ({tovar}) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Sharek</Button>
+        <Button size="small">Sharekl</Button>
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
