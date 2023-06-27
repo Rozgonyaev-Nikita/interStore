@@ -10,10 +10,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import React, { useState } from 'react'
 import { BasketSide } from '../../../components/BasketSide/BasketSide';
 import {Search, SearchIconWrapper, StyledInputBase} from './SearchUtils';
+import { useAppSelector } from '../../../hooks/reduxHooks'
 
 export const Header = () => {
 
   const [isOpenBasket, setOpenBasket] = useState(false);
+
+  const countAllTovars = useAppSelector(state => state.tovarsBasket.countAll)
 
   return (
     <>
@@ -50,7 +53,7 @@ export const Header = () => {
               color="inherit"
             >
               {/* <Badge badgeContent={countO} color="secondary"> */}
-              <Badge badgeContent={0} color="secondary">
+              <Badge badgeContent={countAllTovars} color="secondary">
                 <ShoppingBasket color="action" />
               </Badge>
 

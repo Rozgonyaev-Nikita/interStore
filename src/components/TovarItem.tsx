@@ -6,12 +6,20 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import React, { FC } from 'react'
 import { ITovar } from '../interface/tovar.interface'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu';
+import { ShoppingBagOutlined } from '@mui/icons-material'
+import { useAppDispatch } from '../hooks/reduxHooks'
+import { AddTovarInBasket } from '../store/ListProductsBasketSlice'
 
 interface ITovarItem{
     tovar: ITovar
 }
 
 export const TovarItem: FC<ITovarItem> = ({tovar}) => {
+
+  const dispatch = useAppDispatch();
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -31,7 +39,17 @@ export const TovarItem: FC<ITovarItem> = ({tovar}) => {
       </CardContent>
       <CardActions>
         <Button size="small">Sharekl</Button>
-        <Button size="small">Learn Moref</Button>
+        {/* <Button size="small">Learn Moref</Button> */}
+        <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={() => dispatch(AddTovarInBasket(tovar))}
+            >
+              <ShoppingBagOutlined />
+            </IconButton>
       </CardActions>
     </Card>
   )

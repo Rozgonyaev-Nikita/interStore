@@ -5,7 +5,7 @@ import { ITovar, ITovarWithCount, ITovarsCount } from '../interface/tovar.interf
 const initialState: ITovarsCount = {
     tovars: [],
     countAll: 0
-};
+}; 
 
 const listTovarsBasketSlice = createSlice({
     name: 'tovarsBasket',
@@ -21,9 +21,23 @@ const listTovarsBasketSlice = createSlice({
                 state.tovars.push({...action.payload, count: 1});
                 state.countAll++;
             }
+        },
+        DeleteProduct(state:ITovarsCount, action:PayloadAction<number>){
+            const removedProduct = state.tovars.find((state:ITovarWithCount) => state.id == action.payload);
+            const othersProducts = state.tovars.filter((state: ITovarWithCount) => state.id !== action.payload);
+            if(removedProduct && removedProduct.count > 1){
+                removedProduct.count--;
+                state.countAll--;
+            }
+            else{
+                // return {...state, basket:karp}
+                // state.countO--;
+                state.tovars = othersProducts;
+                state.countAll--;
+            }
         }
     }
 })
 
-export const {AddTovarInBasket} = listTovarsBasketSlice.actions;
+export const {AddTovarInBasket, DeleteProduct} = listTovarsBasketSlice.actions;
 export default listTovarsBasketSlice.reducer;

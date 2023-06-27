@@ -1,0 +1,23 @@
+
+.div{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 200px;
+    background-color: rgb(230, 230, 230);
+}
+
+.cartBaskTovar{
+    border: 1px solid black;
+    margin: 10px 20px 10px 10px;
+    line-height: 24px;
+    width: auto;
+    background-color: #333;
+    color: #ddd;
+}
+
+.deleteIcon :hover{
+    scale: 1.1;
+    fill: red;
+}
