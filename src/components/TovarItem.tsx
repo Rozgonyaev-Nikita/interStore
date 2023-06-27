@@ -31,7 +31,7 @@ export const TovarItem: FC<ITovarItem> = ({tovar}) => {
       </CardContent>
       <CardActions>
         <Button size="small">Sharekl</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Learn Moref</Button>
       </CardActions>
     </Card>
   )
