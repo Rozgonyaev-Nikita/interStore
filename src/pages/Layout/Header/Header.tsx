@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import React, { useState } from 'react'
 import { BasketSide } from '../../../components/BasketSide/BasketSide';
-import {Search, SearchIconWrapper, StyledInputBase} from './SearchUtils';
+import {Search, SearchIconWrapper, StyledInputBase} from './SearchStyles';
 import { useAppSelector } from '../../../hooks/reduxHooks'
 
 export const Header = () => {

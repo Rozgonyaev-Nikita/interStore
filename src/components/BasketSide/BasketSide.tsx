@@ -1,12 +1,7 @@
-import React, { useState, useEffect, useRef, FC } from 'react'
+import { useRef, FC } from 'react'
 import classes from './BasketSide.module.scss'
-import { IPost } from '../../interface/IPosts'
-import { useSelector } from 'react-redux';
-// import { useAppDispatch, useAppSelector } from '../../hooks/hook';
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Drawer } from '@mui/material';
-import InboxIcon, { DeleteOutlineOutlined, ShoppingBasket } from '@mui/icons-material';
-import MailIcon from '@mui/icons-material';
-import { open, setOpenBasket } from '../../pages/Layout/Header/Header'
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Drawer } from '@mui/material';
+import { DeleteOutlineOutlined, ShoppingBasket } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { DeleteProduct } from '../../store/ListProductsBasketSlice';
 
@@ -18,8 +13,8 @@ interface IDrawer {
 export const BasketSide: FC<IDrawer> = ({ open, onClose }): JSX.Element => {
 
   const tovars = useAppSelector(state => state.tovarsBasket.tovars);
-  const divRef = useRef<HTMLDivElement>(null);
-  const DrawerRef = useRef<React.RefObject<HTMLDivElement> | null | undefined>();
+  const divRef = useRef<HTMLUListElement>(null);
+  const DrawerRef = useRef<HTMLDivElement>(null);
 
   // const openBasket = useAppSelector(state => state.openBasket);
 
@@ -63,7 +58,7 @@ export const BasketSide: FC<IDrawer> = ({ open, onClose }): JSX.Element => {
               className={classes.deleteIcon}
             />
           </ListItem>
-        ) : <h1 style={{ color: 'red', fontSize: '36px' }}>Корзина пуста</h1>}
+        ) : <h1 style={{ color: 'red', fontSize: '36px', textAlign: 'center' }}>Корзина пуста</h1>}
       </List>
 
     </Drawer>
