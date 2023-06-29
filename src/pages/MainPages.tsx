@@ -10,7 +10,7 @@ import { useSearchParams } from 'react-router-dom';
 
 export const MainPages = () => {
 
-  const [tovars, setTovars] = useState<ITovar[]>([]);
+  const [allTovars, setallTovars] = useState<ITovar[]>([]);
   const [page, setPage] = useState<number>(0);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,17 +18,20 @@ export const MainPages = () => {
   const numberTovarsInPage = 6;
 
   useEffect(() => {
-    axios.get('https://fakestoreapi.com/products').then(res => setTovars(res.data))
+    axios.get('https://fakestoreapi.com/products').then(res => setallTovars(res.data))
   })
 
-  const mTovars = useMemo(() => {
-    return tovars.filter(items => items.title.includes(searchParams.get('karp') || ''))
-  },[])
+  const tovars = useMemo(() => {
+    if(searchParams.get('karp')){
+      return allTovars.filter(items => items.title.includes(searchParams.get('karp') || ''))
+    }
+    return allTovars;
+  },[allTovars, searchParams])
 
   return (
     <>
-      <TovarList tovars={tovars} page={page} numberTovarsInPage={numberTovarsInPage}></TovarList>
-      <PaginationC tovars={tovars} page={page} setPage={setPage} numberTovarsInPage={numberTovarsInPage}></PaginationC>
+      <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage}></TovarList>
+      <PaginationC tovars={tovars} page={page} setPage={setPage} ntip={numberTovarsInPage}></PaginationC>
     </>
   )
 }
