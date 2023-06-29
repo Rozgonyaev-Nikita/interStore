@@ -11,10 +11,12 @@ import React, { useState } from 'react'
 import { BasketSide } from '../../../components/BasketSide/BasketSide';
 import {Search, SearchIconWrapper, StyledInputBase} from './SearchStyles';
 import { useAppSelector } from '../../../hooks/reduxHooks'
+import { SearchInp } from './Search'
 
 export const Header = () => {
 
-  const [isOpenBasket, setOpenBasket] = useState(false);
+  const [isOpenBasket, setOpenBasket] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>('');
 
   const countAllTovars = useAppSelector(state => state.tovarsBasket.countAll)
 
@@ -35,15 +37,7 @@ export const Header = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Типо сайт
             </Typography>
-            <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+            <SearchInp/>
             <IconButton
               size="large"
               aria-label="account of current user"

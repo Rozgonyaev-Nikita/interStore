@@ -7,9 +7,10 @@ interface IPagination{
   page: number,
   setPage: (page: number) => void,
   tovars: ITovar[],
+  numberTovarsInPage: number
 }
 
-export const PaginationC: React.FC<IPagination> = ({page, setPage, tovars}) => {
+export const PaginationC: React.FC<IPagination> = ({page, setPage, tovars, numberTovarsInPage}) => {
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value - 1);
@@ -18,7 +19,7 @@ export const PaginationC: React.FC<IPagination> = ({page, setPage, tovars}) => {
 
   return (
     <Container sx={{display:'flex', justifyContent:'center'}}>
-        <Pagination count={Math.ceil(tovars.length/6)} page={page} onChange={handleChange} />
+        <Pagination count={Math.ceil(tovars.length/numberTovarsInPage)} page={page} onChange={handleChange} />
       </Container>
   )
 }
