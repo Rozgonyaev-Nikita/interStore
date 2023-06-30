@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { TovarItem } from '../components/TovarItem';
 import { TovarList } from '../components/TovarList';
 import Pagination from '@mui/material/Pagination';
-import { Box, Container } from '@mui/material';
+import { Box, Button, Container, Snackbar } from '@mui/material';
 import { PaginationC } from '../UI/PaginationC/PaginationC';
 import { ITovar } from '../interface/tovar.interface';
 import { useSearchParams } from 'react-router-dom';
@@ -16,6 +16,8 @@ export const MainPages = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const numberTovarsInPage = 6;
+
+  
 
   useEffect(() => {
     axios.get('https://fakestoreapi.com/products').then(res => setallTovars(res.data))
@@ -32,6 +34,7 @@ export const MainPages = () => {
     <>
       <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage}></TovarList>
       <PaginationC tovars={tovars} page={page} setPage={setPage} ntip={numberTovarsInPage}></PaginationC>
+      
     </>
   )
 }

@@ -12,7 +12,7 @@ interface IPagination{
 
 export const PaginationC: React.FC<IPagination> = ({page, setPage, tovars, ntip}) => {
 
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number): void => {
     setPage(value - 1);
     console.log(value);
   };
