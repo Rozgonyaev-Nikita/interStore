@@ -1,39 +1,47 @@
 import axios from 'axios'
-import React, { useEffect, useMemo, useState } from 'react'
-import { TovarItem } from '../components/TovarItem';
+import  { useMemo, useState } from 'react'
 import { TovarList } from '../components/TovarList';
-import Pagination from '@mui/material/Pagination';
-import { Box, Button, Container, Snackbar } from '@mui/material';
 import { PaginationC } from '../UI/PaginationC/PaginationC';
 import { ITovar } from '../interface/tovar.interface';
 import { useSearchParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import Skeleton from '../UI/Skeleton/Skeleton';
+
 
 export const MainPages = () => {
 
-  const [allTovars, setallTovars] = useState<ITovar[]>([]);
   const [page, setPage] = useState<number>(0);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const numberTovarsInPage = 6;
 
-  
-
-  useEffect(() => {
-    axios.get('https://fakestoreapi.com/products').then(res => setallTovars(res.data))
-  })
+  const tovarsFetching = async() => {
+   const {data} = await axios.get<ITovar[]>('https://fakestoreapi.com/products');
+    return data;
+  }
+  const {data: allTovars = [] as ITovar[], isLoading, isError} = useQuery('tovars', tovarsFetching, {refetchOnWindowFocus: false});
 
   const tovars = useMemo(() => {
     if(searchParams.get('karp')){
-      return allTovars.filter(items => items.title.includes(searchParams.get('karp') || ''))
+      return allTovars.filter(items => items.title.toLowerCase().includes(searchParams.get('karp') || ''))
     }
+    searchParams.delete('karp');
     return allTovars;
   },[allTovars, searchParams])
 
+  if(isLoading){
+     return <Skeleton></Skeleton>
+  }
+
+  if(isError){
+    return <h1>Ошибка нахой!</h1>
+  }
+
   return (
     <>
-      <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage}></TovarList>
-      <PaginationC tovars={tovars} page={page} setPage={setPage} ntip={numberTovarsInPage}></PaginationC>
+      {allTovars && <><TovarList tovars={tovars} page={page} ntip={numberTovarsInPage}></TovarList>
+      <PaginationC tovars={tovars} page={page} setPage={setPage} ntip={numberTovarsInPage}></PaginationC></>}
       
     </>
   )

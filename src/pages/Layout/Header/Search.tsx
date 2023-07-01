@@ -16,7 +16,7 @@ export const SearchInp = () => {
             <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
-                onChange={(e) => setSearchParams({karp: e.target.value})}
+                onChange={(e) => setSearchParams({karp: (e.target.value).toLowerCase()})}
             />
         </Search>
         </>
