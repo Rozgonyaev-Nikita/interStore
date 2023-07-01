@@ -18,7 +18,8 @@ footer{
 }
 main{
   min-height: 100vh;
-  margin: 15px 40px;
+  /* margin: 15px 40px; */
+  margin: 15px 3vw;
   padding: 10px;
 
   border: 1px solid #ddd;

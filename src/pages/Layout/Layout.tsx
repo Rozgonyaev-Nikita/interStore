@@ -8,7 +8,7 @@ export const Layout = () => {
   return (
     <>
         <Header></Header>
-        <main>
+        <main style={{backgroundColor:'#fafafa'}}>
             <Outlet/>
         </main>
         <Footer></Footer>

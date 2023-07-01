@@ -14,7 +14,7 @@ export const MainPages = () => {
 
   const [searchParams] = useSearchParams();
 
-  const numberTovarsInPage = 6;
+  const numberTovarsInPage = 8;
 
   const tovarsFetching = async() => {
    const {data} = await axios.get<ITovar[]>('https://fakestoreapi.com/products');
