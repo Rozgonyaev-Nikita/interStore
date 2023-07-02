@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box'
 import Skeleton from '@mui/material/Skeleton'
 import Stack from '@mui/material/Stack'
-import React from 'react'
 
 const SkeletonUI = () => {
 
@@ -29,7 +28,3 @@ const SkeletonUI = () => {
 }
 
 export default SkeletonUI;
-
-///
-///
-///

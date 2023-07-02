@@ -1,11 +1,10 @@
 import axios from 'axios'
 import  { useMemo, useState } from 'react'
-import { TovarList } from '../components/TovarList';
-import { PaginationC } from '../UI/PaginationC/PaginationC';
+import { TovarList } from '../components';
+import { PaginationC, Skeleton } from '../UI';
 import { ITovar } from '../interface/tovar.interface';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import Skeleton from '../UI/Skeleton/Skeleton';
 
 
 export const MainPages = () => {

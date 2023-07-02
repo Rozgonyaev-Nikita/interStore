@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useMemo } from 'react'
 import { ITovar } from '../interface/tovar.interface'
-import { TovarItem } from './TovarItem'
+import { TovarItem } from './index'
 import { useSearchParams } from 'react-router-dom'
 
 interface ITovarA{
@@ -9,7 +9,7 @@ interface ITovarA{
     ntip: number; // numberTovarsInPage
 }
 
-export const TovarList: FC<ITovarA> = ({tovars, page, ntip}) => {
+const TovarList: FC<ITovarA> = ({tovars, page, ntip}) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -21,3 +21,5 @@ export const TovarList: FC<ITovarA> = ({tovars, page, ntip}) => {
     </div>
   )
 }
+
+export default TovarList;

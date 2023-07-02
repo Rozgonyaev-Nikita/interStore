@@ -10,7 +10,7 @@ interface IPagination{
   ntip: number // numberTovarsInPage
 }
 
-export const PaginationC: React.FC<IPagination> = ({page, setPage, tovars, ntip}) => {
+const PaginationC: React.FC<IPagination> = ({page, setPage, tovars, ntip}) => {
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number): void => {
     setPage(value - 1);
@@ -25,3 +25,4 @@ export const PaginationC: React.FC<IPagination> = ({page, setPage, tovars, ntip}
   )
 }
 
+export default PaginationC;

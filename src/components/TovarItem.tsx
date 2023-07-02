@@ -19,7 +19,7 @@ interface ITovarItem {
   tovar: ITovar
 }
 
-export const TovarItem: FC<ITovarItem> = ({ tovar }) => {
+const TovarItem: FC<ITovarItem> = ({ tovar }) => {
 
 
   const [open, setOpen] = useState<boolean>(false);
@@ -87,3 +87,4 @@ export const TovarItem: FC<ITovarItem> = ({ tovar }) => {
   )
 }
 
+export default TovarItem;

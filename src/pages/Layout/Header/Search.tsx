@@ -11,7 +11,7 @@ export const SearchInp = () => {
     const searchDeboubce = debounce((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         console.log('karo')
         setSearchParams({ karp: (e.target.value).toLowerCase() });
-    }, 300);
+    }, 500);
    
 
     return (
