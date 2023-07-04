@@ -14,7 +14,7 @@ function App() {
         <Route path='/avtorization' element ={<Avtorization/>}/> */}
         <Route path='/' element={<Layout/>}>
           <Route index element={<MainPages></MainPages>} />
-          {/* <Route path='/:id' element={<ViewingProducts></ViewingProducts>} /> */}
+          <Route path='/:id' element={<ViewingProducts></ViewingProducts>} />
           {/* <Route path='post' element={<Posts></Posts>} />
           <Route path='about' element={<About />} />
           <Route path='contacts' element={<Contacts />} />

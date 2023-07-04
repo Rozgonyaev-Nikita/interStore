@@ -10,19 +10,19 @@ import IconButton from '@mui/material/IconButton'
 import { ShoppingBagOutlined } from '@mui/icons-material'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import { AddTovarInBasket } from '../store/ListProductsBasketSlice'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
 import { Badge } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 
 interface ITovarItem {
-  tovar: ITovar
+  tovar: ITovar,
+  setOpen: () => void
 }
 
-const TovarItem: FC<ITovarItem> = ({ tovar }) => {
+const TovarItem: FC<ITovarItem> = ({ tovar, setOpen }) => {
 
 
-  const [open, setOpen] = useState<boolean>(false);
+  // const [open, setOpen] = useState<boolean>(false);
   const [addedInBasket, setAddedInBasket] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -32,7 +32,7 @@ const TovarItem: FC<ITovarItem> = ({ tovar }) => {
   const shoppingBagIcon: JSX.Element = addedInBasket ? <ShoppingBagOutlined style={{ color: "red" }} /> : <ShoppingBagOutlined />;
 
   const AddTovarBasket = (tovar: ITovar): void => {
-    setOpen(true);
+    setOpen();
     dispatch(AddTovarInBasket(tovar));
     setAddedInBasket(true);
   };
@@ -61,13 +61,15 @@ const TovarItem: FC<ITovarItem> = ({ tovar }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Sharekl</Button>
+        <Link to={`/${tovar.id}`}>
+          <Button size="small">Подробнее</Button>
+        </Link>
         <IconButton
           size="large"
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ mr: 2 }}
+          sx={{ ml: 1 }}
           onClick={() => AddTovarBasket(tovar)}
         >
           <Badge badgeContent={countInBasket} color="secondary">
@@ -76,13 +78,13 @@ const TovarItem: FC<ITovarItem> = ({ tovar }) => {
           
         </IconButton>
       </CardActions>
-      <Snackbar
+      {/* <Snackbar
         open={open}
         autoHideDuration={6000}
         onClose={() => setOpen(false)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       ><Alert severity="success">Товар добавлен в корзину!</Alert>
-      </Snackbar>
+      </Snackbar> */}
     </Card>
   )
 }

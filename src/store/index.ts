@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit'
 import ListProductsBasketSlice from './ListProductsBasketSlice';
+import FetchTovars from './FetchTovars';
 
 
 const store = configureStore({
     reducer:{
-        tovarsBasket: ListProductsBasketSlice
+        tovarsBasket: ListProductsBasketSlice,
+        fetchTovar: FetchTovars
     }
 })
 
