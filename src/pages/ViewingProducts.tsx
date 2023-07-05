@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ITovar } from "../interface/tovar.interface";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarByIdSelector, tovarsThunk } from "../store/FetchTovars";
-import Rating from "@mui/material/Rating";
+import ProductFull from "../components/TovarFull/TovarFull";
+import { SimilarTovaList } from "../components";
 
 export const ViewingProducts = () => {
   const { id } = useParams();
@@ -23,9 +24,6 @@ export const ViewingProducts = () => {
     },
   };
 
-  const { title, image, rating } = tovar;
-  console.log(tovar);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -43,35 +41,8 @@ export const ViewingProducts = () => {
     <div>
       <button onClick={() => navigate(-1)}>Назад</button>
       <br />
-      <div>
-        {tovar && (
-          <>
-            <img src={image} alt="Товар" width={300} />
-            <h1>{title}</h1>
-            <div>
-              {/* <div style={{ display: "inline-block" }}> */}
-              <Rating
-                name="half-rating-read"
-                defaultValue={2.5}
-                value={rating.rate}
-                precision={0.1}
-                readOnly
-                style={{ verticalAlign: "middle" }}
-              />
-              {/* </div> */}
-
-              <p
-                style={{
-                  display: "inline-block",
-                  verticalAlign: "middle",
-                }}
-              >
-                {rating.count}
-              </p>
-            </div>
-          </>
-        )}
-      </div>
+      <ProductFull tovar={tovar}></ProductFull>
+      <SimilarTovaList tovar={tovar} />
     </div>
   );
 };

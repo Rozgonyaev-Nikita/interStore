@@ -1,28 +1,24 @@
-import { ShoppingBasket } from '@mui/icons-material'
-import AppBar from '@mui/material/AppBar'
-import Badge from '@mui/material/Badge'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import React, { useState } from 'react'
-import { BasketSide } from '../../../components/BasketSide/BasketSide';
-import {Search, SearchIconWrapper, StyledInputBase} from './SearchStyles';
-import { useAppSelector } from '../../../hooks/reduxHooks'
-import { SearchInp } from './Search'
+import { ShoppingBasket } from "@mui/icons-material";
+import AppBar from "@mui/material/AppBar";
+import Badge from "@mui/material/Badge";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
+import { BasketSide } from "../../../components/BasketSide/BasketSide";
+import { useAppSelector } from "../../../hooks/reduxHooks";
+import { SearchInp } from "./Search";
 
 export const Header = () => {
-
   const [isOpenBasket, setOpenBasket] = useState<boolean>(false);
-  const [search, setSearch] = useState<string>('');
 
-  const countAllTovars = useAppSelector(state => state.tovarsBasket.countAll)
+  const countAllTovars = useAppSelector((state) => state.tovarsBasket.countAll);
 
   return (
     <>
-    <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
             <IconButton
@@ -37,7 +33,7 @@ export const Header = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Типо сайт
             </Typography>
-            <SearchInp/>
+            <SearchInp />
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -50,12 +46,14 @@ export const Header = () => {
               <Badge badgeContent={countAllTovars} color="secondary">
                 <ShoppingBasket color="action" />
               </Badge>
-
             </IconButton>
           </Toolbar>
         </AppBar>
-        <BasketSide open={isOpenBasket} onClose={() => setOpenBasket(false)}></BasketSide>
+        <BasketSide
+          open={isOpenBasket}
+          onClose={() => setOpenBasket(false)}
+        ></BasketSide>
       </Box>
-      </>
-  )
-}
+    </>
+  );
+};

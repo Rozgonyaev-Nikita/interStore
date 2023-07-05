@@ -1,10 +1,7 @@
-import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { TovarList } from "../components";
 import { PaginationC, Skeleton } from "../UI";
-import { ITovar } from "../interface/tovar.interface";
 import { useSearchParams } from "react-router-dom";
-import { useQuery } from "react-query";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
 
