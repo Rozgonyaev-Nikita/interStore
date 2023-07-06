@@ -5,23 +5,25 @@ import axios from "axios";
 import SimilarTovaItem from "./SimilarTovaItem";
 import classes from "./SimilarTovar.module.scss";
 import { Link } from "react-router-dom";
+import { TovarItem } from "..";
 
 const SimilarTovaList: FC<ITovarProps> = ({ tovar }) => {
-  const [simTovarsAll, setSimTovars] = useState<ITovar[]>([]);
+  const [simTovars, setSimTovars] = useState<ITovar[]>([]);
   // console.log("tov", tovar);
   // console.log("шыЕщмфк", tovar);
   // useWhyDidYouUpdate("SimilarTovaList", tovar);
 
   const getSimilarTovars = async () => {
-    const { data } = await axios.get<ITovar[]>(
-      `https://fakestoreapi.com/products/category/${tovar.category}`
-    );
-    console.log("tovпр", data);
-    setSimTovars(data);
+    try {
+      const { data } = await axios.get<ITovar[]>(
+        `https://fakestoreapi.com/products/category/${tovar.category}?limit=4`
+      );
+      console.log("tovпр", data);
+      setSimTovars(data);
+    } catch (e) {
+      console.log("Плоха с сервером!");
+    }
   };
-
-  const simTovars =
-    simTovarsAll && simTovarsAll.filter((item) => item.id !== tovar.id);
 
   useEffect(() => {
     getSimilarTovars();
@@ -34,11 +36,14 @@ const SimilarTovaList: FC<ITovarProps> = ({ tovar }) => {
           <div>
             <h2>Похожие товары</h2>
             <div className={classes.grid}>
-              {simTovars.map((tovar) => (
-                <Link to={`/${tovar.id}`} key={tovar.id}>
-                  <SimilarTovaItem tovar={tovar} />
-                </Link>
-              ))}
+              {simTovars
+                .filter((item) => item.id !== tovar.id)
+                .map((tovar) => (
+                  <Link to={`/${tovar.id}`} key={tovar.id}>
+                    <TovarItem tovar={tovar} isFull={false} />
+                    {/* <SimilarTovaItem tovar={tovar} /> */}
+                  </Link>
+                ))}
             </div>
           </div>
         </>

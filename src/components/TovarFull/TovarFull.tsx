@@ -8,7 +8,7 @@ interface ITovartProps {
 }
 
 const ProductFull: FC<ITovartProps> = ({ tovar }) => {
-  const { title, description, image, rating } = tovar;
+  const { title, description, price, image, rating } = tovar;
   console.log(tovar);
 
   return (
@@ -30,10 +30,12 @@ const ProductFull: FC<ITovartProps> = ({ tovar }) => {
               style={{
                 display: "inline-block",
                 verticalAlign: "middle",
+                marginLeft: "10px",
               }}
             >
-              {rating.count}
+              {rating.count} оценок
             </p>
+            <h2>{Math.round((price * 85) / 10) * 10} &#x20bd;</h2>
             <p>{description}</p>
           </div>
         </div>

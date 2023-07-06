@@ -25,7 +25,9 @@ const PaginationC: React.FC<IPagination> = ({
   };
 
   return (
-    <Container sx={{ display: "flex", justifyContent: "center" }}>
+    <Container
+      sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
+    >
       <Pagination
         count={Math.ceil(tovars.length / ntip)}
         page={page}

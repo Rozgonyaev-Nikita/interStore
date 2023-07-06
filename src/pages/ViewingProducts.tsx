@@ -39,7 +39,9 @@ export const ViewingProducts = () => {
 
   return (
     <div>
-      <button onClick={() => navigate(-1)}>Назад</button>
+      <button onClick={() => navigate("/")} style={{ marginBottom: "15px" }}>
+        Назад
+      </button>
       <br />
       <ProductFull tovar={tovar}></ProductFull>
       <SimilarTovaList tovar={tovar} />

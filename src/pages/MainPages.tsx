@@ -23,10 +23,10 @@ export const MainPages = () => {
   // const {data: allTovars = [] as ITovar[], isLoading, isError} = useQuery('tovars', tovarsFetching, {refetchOnWindowFocus: false});
 
   useEffect(() => {
-    dispatch(tovarsThunk());
+    if (allTovars.length == 0) {
+      dispatch(tovarsThunk());
+    }
   }, [dispatch]);
-
-  console.log("rend", allTovars);
 
   const tovars = useMemo(() => {
     if (searchParams.get("karp")) {
@@ -38,15 +38,6 @@ export const MainPages = () => {
     return allTovars;
   }, [allTovars, searchParams]);
 
-  console.log("tovars", tovars);
-
-  // if(isLoading){
-  //    return <Skeleton></Skeleton>
-  // }
-
-  // if(isError){
-  //   return <h1>Ошибка нахой!</h1>
-  // }
   if (status === "pending") {
     return <Skeleton></Skeleton>;
   }
@@ -58,17 +49,13 @@ export const MainPages = () => {
     <>
       {tovars.length !== 0 ? (
         <>
-          <TovarList
-            tovars={tovars}
-            page={page}
-            ntip={numberTovarsInPage}
-          ></TovarList>
+          <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />
           <PaginationC
             tovars={tovars}
             page={page}
             setPage={setPage}
             ntip={numberTovarsInPage}
-          ></PaginationC>
+          />
         </>
       ) : (
         <div>Корзина пуста</div>

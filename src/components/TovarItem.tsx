@@ -15,10 +15,11 @@ import { Link } from "react-router-dom";
 
 interface ITovarItem {
   tovar: ITovar;
-  setOpen: () => void;
+  setOpen?: () => void;
+  isFull?: true | false;
 }
 
-const TovarItem: FC<ITovarItem> = ({ tovar, setOpen }) => {
+const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
   // const [open, setOpen] = useState<boolean>(false);
   const [addedInBasket, setAddedInBasket] = useState<boolean>(false);
 
@@ -36,10 +37,13 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen }) => {
   );
 
   const AddTovarBasket = (tovar: ITovar): void => {
-    setOpen();
+    if (setOpen) {
+      setOpen();
+    }
     dispatch(AddTovarInBasket(tovar));
     setAddedInBasket(true);
   };
+
   useEffect(() => {
     if (countInBasket) {
       setAddedInBasket(true);
@@ -77,30 +81,25 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen }) => {
           {tovar.description}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Link to={`/${tovar.id}`}>
-          <Button size="small">Подробнее</Button>
-        </Link>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ ml: 1 }}
-          onClick={() => AddTovarBasket(tovar)}
-        >
-          <Badge badgeContent={countInBasket} color="secondary">
-            {shoppingBagIcon}
-          </Badge>
-        </IconButton>
-      </CardActions>
-      {/* <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      ><Alert severity="success">Товар добавлен в корзину!</Alert>
-      </Snackbar> */}
+      {isFull && (
+        <CardActions>
+          <Link to={`/${tovar.id}`}>
+            <Button size="small">Подробнее</Button>
+          </Link>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ ml: 1 }}
+            onClick={() => AddTovarBasket(tovar)}
+          >
+            <Badge badgeContent={countInBasket} color="secondary">
+              {shoppingBagIcon}
+            </Badge>
+          </IconButton>
+        </CardActions>
+      )}
     </Card>
   );
 };
