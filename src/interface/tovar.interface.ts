@@ -7,12 +7,15 @@ export interface ITovar {
   image: string;
   rating: IRating;
 }
+
 export interface ITovarWithCount extends ITovar {
   count: number;
 }
+
 export interface ITovarProps {
   tovar: ITovar;
 }
+
 export interface ITovarsCount {
   tovars: ITovarWithCount[];
   countAll: number;

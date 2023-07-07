@@ -41,7 +41,6 @@ const SimilarTovaList: FC<ITovarProps> = ({ tovar }) => {
                 .map((tovar) => (
                   <Link to={`/${tovar.id}`} key={tovar.id}>
                     <TovarItem tovar={tovar} isFull={false} />
-                    {/* <SimilarTovaItem tovar={tovar} /> */}
                   </Link>
                 ))}
             </div>
