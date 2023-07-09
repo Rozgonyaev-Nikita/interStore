@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { TovarList } from "../components";
-import { PaginationC, Skeleton } from "../UI";
+import { AddTovar, TovarList } from "../components";
+import { MyModal, PaginationC, Skeleton } from "../UI";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import {
@@ -11,6 +11,7 @@ import {
 
 export const MainPages = () => {
   const [page, setPage] = useState<number>(0);
+  const [isOpenModal, setOpenModal] = useState<boolean>(true);
 
   const dispatch = useAppDispatch();
 
@@ -67,6 +68,9 @@ export const MainPages = () => {
       ) : (
         <div>Корзина пуста</div>
       )}
+      <MyModal isOpen={isOpenModal}>
+        <AddTovar></AddTovar>
+      </MyModal>
     </>
   );
 };
