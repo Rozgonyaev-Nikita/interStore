@@ -11,7 +11,7 @@ import {
 
 export const MainPages = () => {
   const [page, setPage] = useState<number>(0);
-  const [isOpenModal, setOpenModal] = useState<boolean>(true);
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
@@ -54,7 +54,7 @@ export const MainPages = () => {
 
   return (
     <>
-      <button onClick={addTovar}>Добавить товар</button>
+      <button onClick={() => setOpenModal(true)}>Добавить товар</button>
       {tovars.length !== 0 ? (
         <>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />
@@ -68,7 +68,7 @@ export const MainPages = () => {
       ) : (
         <div>Корзина пуста</div>
       )}
-      <MyModal isOpen={isOpenModal}>
+      <MyModal setOpen={setOpenModal} isOpen={isOpenModal}>
         <AddTovar></AddTovar>
       </MyModal>
     </>

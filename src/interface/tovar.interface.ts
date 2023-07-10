@@ -4,8 +4,8 @@ export interface ITovar {
   price: number;
   description: string;
   category: string;
-  image: string;
-  rating: IRating;
+  image?: string;
+  rating?: IRating;
 }
 
 export interface ITovarWithCount extends ITovar {

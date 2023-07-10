@@ -13,7 +13,7 @@ interface ITovarA {
 
 const TovarList: FC<ITovarA> = ({ tovars, page, ntip }) => {
   const [open, setOpen] = useState<boolean>(false);
-
+  console.log("lf", tovars);
   // const [searchParams, setSearchParams] = useSearchParams();
 
   return (

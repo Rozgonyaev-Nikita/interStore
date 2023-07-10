@@ -11,10 +11,12 @@
 }
 
 .component {
-  min-width: 400px;
+  min-width: 300px;
   background-color: white;
   display: flex;
   justify-content: center;
+  padding: 15px;
+  border-radius: 10px;
 }
 
 .active {

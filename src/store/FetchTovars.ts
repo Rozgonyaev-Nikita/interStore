@@ -10,6 +10,25 @@ export const tovarsThunk = createAsyncThunk("tovars/getTovars", async () => {
   return data;
 });
 
+export const tovarsThunkPost = createAsyncThunk(
+  "tovars/postikTovars",
+  async (tovar: ITovar, { dispatch }) => {
+    const { data } = await axios.post<ITovar>(
+      `https://fakestoreapi.com/products`,
+      {
+        title: "test product",
+        price: 13.5,
+        description: "lorem ipsum set",
+        image: "https://i.pravatar.cc",
+        category: "electronic",
+      }
+    );
+    console.log("dgkarp", tovar);
+    dispatch(addTovar(data));
+    // return [data];
+  }
+);
+
 export const addTovarsThunk = createAsyncThunk(
   "th/postTovars",
   async (_, { dispatch }) => {
