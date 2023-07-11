@@ -12,19 +12,24 @@ export const tovarsThunk = createAsyncThunk("tovars/getTovars", async () => {
 
 export const tovarsThunkPost = createAsyncThunk(
   "tovars/postikTovars",
-  async (tovar: ITovar, { dispatch }) => {
-    const { data } = await axios.post<ITovar>(
-      `https://fakestoreapi.com/products`,
-      {
-        title: "test product",
-        price: 13.5,
-        description: "lorem ipsum set",
-        image: "https://i.pravatar.cc",
-        category: "electronic",
-      }
-    );
-    console.log("dgkarp", tovar);
-    dispatch(addTovar(data));
+  async (tovar: ITovar, { dispatch, rejectWithValue }) => {
+    try {
+      const { data } = await axios.post<ITovar>(
+        `https://fakestoreapi.com/products`,
+        {
+          title: tovar.title,
+          price: tovar.price,
+          description: tovar.description,
+          // image: "https://i.pravatar.cc",
+          category: "other",
+        }
+      );
+      console.log("dgkarp", tovar);
+      dispatch(addTovar(data));
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+
     // return [data];
   }
 );
@@ -80,6 +85,10 @@ const thunkTovarSlice = createSlice({
       })
       .addCase(tovarsThunk.rejected, (state) => {
         state.status = "failed";
+      })
+      .addCase(tovarsThunkPost.rejected, (state) => {
+        state.status = "failed";
+        // console.log("ня");
       });
   },
 });

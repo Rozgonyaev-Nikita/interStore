@@ -26,11 +26,8 @@ const AddTovar = () => {
   const dispatch = useAppDispatch();
 
   const addNewTovar = () => {
-    const newTovar = {
-      image: "https://i.pravatar.cc",
-      ...tovar,
-      category: "electronic",
-    };
+    const newTovar = tovar;
+
     dispatch(tovarsThunkPost(newTovar));
     console.log("nwtv", newTovar);
   };

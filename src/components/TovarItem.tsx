@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { AddTovarInBasket } from "../store/ListProductsBasketSlice";
 import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
+import noTovar from "../assets/no_product.jpg";
 
 interface ITovarItem {
   tovar: ITovar;
@@ -61,7 +62,7 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
           backgroundSize: "contain",
           backgroundPosition: "center",
         }}
-        image={tovar.image}
+        image={tovar.image ? tovar.image : noTovar}
         title={tovar.title}
       />
       <CardContent>
