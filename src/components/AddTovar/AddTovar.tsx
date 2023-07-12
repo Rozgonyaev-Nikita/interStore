@@ -21,8 +21,9 @@ const initialTovar: ITovar = {
   },
 };
 type Inputs = {
-  example: string;
+  title: string;
   name: string;
+  price: string;
 };
 
 const AddTovar = () => {
@@ -52,7 +53,7 @@ const AddTovar = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={2} sx={{ width: "300px" }}>
+        <Stack spacing={1} sx={{ width: "300px" }}>
           <TextField
             id="name"
             {...register("name", {
@@ -65,16 +66,32 @@ const AddTovar = () => {
             autoComplete="off"
           />
           {errors?.name ? (
-            <div style={{ margin: "0 0", padding: "0 0", color: "red" }}>
+            <div
+              style={{
+                margin: "0 0",
+                padding: "0 0",
+                color: "red",
+                fontSize: "14px",
+              }}
+            >
               {errors?.name?.message || "karp"}
             </div>
           ) : (
             <div
-              style={{ padding: "0 0 20px 0px", margin: "0 0", color: "red" }}
+              style={{
+                padding: "0 0 20px 0px",
+                margin: "0 0",
+                color: "red",
+                fontSize: "14px",
+              }}
             ></div>
           )}
           <TextField
-            id="filled-basicg"
+            id="price"
+            type="number"
+            {...register("price", {
+              required: "Поле обязательное",
+            })}
             onChange={(e) =>
               setTovar({ ...tovar, price: Number(e.target.value) })
             }
@@ -82,8 +99,28 @@ const AddTovar = () => {
             variant="filled"
             autoComplete="off"
           />
+          {errors?.price ? (
+            <div
+              style={{
+                margin: "0 0",
+                padding: "0 0",
+                color: "red",
+                fontSize: "14px",
+              }}
+            >
+              {errors?.price?.message || "karp"}
+            </div>
+          ) : (
+            <div
+              style={{ padding: "0 0 20px 0px", margin: "0 0", color: "red" }}
+            ></div>
+          )}
           <TextField
-            id="filled-basicj"
+            id="title"
+            {...register("title", {
+              required: "Поле обязательное",
+              minLength: { value: 5, message: "Слишком коротко" },
+            })}
             onChange={(e) =>
               setTovar({ ...tovar, description: e.target.value })
             }
@@ -91,6 +128,22 @@ const AddTovar = () => {
             variant="filled"
             autoComplete="off"
           />
+          {errors?.title ? (
+            <div
+              style={{
+                margin: "0 0",
+                padding: "0 0",
+                color: "red",
+                fontSize: "14px",
+              }}
+            >
+              {errors?.title?.message || "karp"}
+            </div>
+          ) : (
+            <div
+              style={{ padding: "0 0 20px 0px", margin: "0 0", color: "red" }}
+            ></div>
+          )}
           <Grid container>
             <Button
               sx={{ width: "60%", margin: "0 auto" }}
