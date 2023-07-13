@@ -24,11 +24,11 @@ export const ViewingProducts = () => {
     },
   };
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(tovarsThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(tovarsThunk());
+  // }, [dispatch]);
 
   // async function tovarFetching() {
   //   const {data} = await axios.get<ITovar>(`https://fakestoreapi.com/products/${id}`);

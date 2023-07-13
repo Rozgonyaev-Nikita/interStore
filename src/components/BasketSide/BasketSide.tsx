@@ -10,7 +10,10 @@ import {
 } from "@mui/material";
 import { DeleteOutlineOutlined, ShoppingBasket } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { DeleteProduct } from "../../store/ListProductsBasketSlice";
+import {
+  DeleteProduct,
+  totalPriceSelector,
+} from "../../store/ListProductsBasketSlice";
 
 interface IDrawer {
   open: boolean;
@@ -19,12 +22,15 @@ interface IDrawer {
 
 export const BasketSide: FC<IDrawer> = ({ open, onClose }): JSX.Element => {
   const tovars = useAppSelector((state) => state.tovarsBasket.tovars);
+  const totalPrice = useAppSelector(totalPriceSelector);
+
   const divRef = useRef<HTMLUListElement>(null);
   const DrawerRef = useRef<HTMLDivElement>(null);
 
   // const openBasket = useAppSelector(state => state.openBasket);
 
   const dispatch = useAppDispatch();
+  console.log(totalPrice);
 
   // useEffect(() => {
   //   document.body.addEventListener('click',(e: unknown): void => {
@@ -46,6 +52,10 @@ export const BasketSide: FC<IDrawer> = ({ open, onClose }): JSX.Element => {
             />
           </ListItemIcon>
           <ListItemText primary="Корзина" />
+          <ListItemText
+            primary={`Общая цена: `}
+            secondary={<span style={{ color: "red" }}>{totalPrice} $</span>}
+          />
         </ListItem>
         <Divider />
         {tovars.length !== 0 ? (

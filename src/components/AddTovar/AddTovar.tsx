@@ -1,4 +1,14 @@
-import { Button, Grid, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  FormHelperText,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 import { ITovar } from "../../interface/tovar.interface";
 import { Add } from "@mui/icons-material";
@@ -6,7 +16,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { addTovarsThunk, tovarsThunkPost } from "../../store/FetchTovars";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 
 const initialTovar: ITovar = {
   id: 0,
@@ -24,18 +34,20 @@ type Inputs = {
   title: string;
   name: string;
   price: string;
+  mySelect: string;
 };
 
 const AddTovar = () => {
   const [tovar, setTovar] = useState<ITovar>(initialTovar);
+  const [selectedFruit, setSelectedFruit] = useState("");
 
   const dispatch = useAppDispatch();
 
   const addNewTovar = () => {
-    const newTovar = tovar;
+    // const newTovar = tovar;
 
-    dispatch(tovarsThunkPost(newTovar));
-    console.log("nwtv", newTovar);
+    dispatch(tovarsThunkPost(tovar));
+    console.log("nwtv", tovar);
   };
 
   const {
@@ -58,7 +70,7 @@ const AddTovar = () => {
             id="name"
             {...register("name", {
               required: "Поле обязательное",
-              minLength: { value: 5, message: "Слишком коротко" },
+              minLength: { value: 3, message: "Слишком коротко" },
             })}
             onChange={(e) => setTovar({ ...tovar, title: e.target.value })}
             label="Заголовок"
@@ -95,7 +107,7 @@ const AddTovar = () => {
             onChange={(e) =>
               setTovar({ ...tovar, price: Number(e.target.value) })
             }
-            label="Цена"
+            label="Цена $"
             variant="filled"
             autoComplete="off"
           />
@@ -144,6 +156,25 @@ const AddTovar = () => {
               style={{ padding: "0 0 20px 0px", margin: "0 0", color: "red" }}
             ></div>
           )}
+          <FormControl variant="filled">
+            <InputLabel id="sl">Категория</InputLabel>
+            <Select
+              id="sl"
+              name="mySelect"
+              value={tovar.category}
+              onChange={(e) => setTovar({ ...tovar, category: e.target.value })}
+            >
+              <MenuItem value="other">Другое</MenuItem>
+              <MenuItem value="men's clothing">Мужская одежда</MenuItem>
+              <MenuItem value="jewelery">Драгоценности</MenuItem>
+              <MenuItem value="electronics">Электроника</MenuItem>
+              <MenuItem value="women's clothing">Женская одежда</MenuItem>
+            </Select>
+            {/* ref={register("mySelect")} */}
+            <FormHelperText>
+              {errors.mySelect && errors.mySelect.message}
+            </FormHelperText>
+          </FormControl>
           <Grid container>
             <Button
               sx={{ width: "60%", margin: "0 auto" }}

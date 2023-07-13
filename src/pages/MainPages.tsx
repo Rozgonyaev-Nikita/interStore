@@ -68,9 +68,6 @@ export const MainPages = () => {
       ) : (
         <div>Корзина пуста</div>
       )}
-      <MyModal setOpen={setOpenModal} isOpen={isOpenModal}>
-        <AddTovar></AddTovar>
-      </MyModal>
     </>
   );
 };
