@@ -27,7 +27,7 @@ export const tovarsThunkPost = createAsyncThunk(
       console.log("dgkarp", tovar);
       dispatch(addTovar(data));
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error);
     }
 
     // return [data];
@@ -37,7 +37,7 @@ export const tovarsThunkPost = createAsyncThunk(
 export const addTovarsThunk = createAsyncThunk(
   "th/postTovars",
   async (_, { dispatch }) => {
-    const { data } = await axios.post<ITovar[]>(
+    const { data } = await axios.post<ITovar>(
       `https://fakestoreapi.com/products`,
       {
         title: "test product",

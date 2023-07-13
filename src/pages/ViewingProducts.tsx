@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ITovar } from "../interface/tovar.interface";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { tovarByIdSelector, tovarsThunk } from "../store/FetchTovars";
+import { useAppSelector } from "../hooks/reduxHooks";
+import { tovarByIdSelector } from "../store/FetchTovars";
 import ProductFull from "../components/TovarFull/TovarFull";
 import { SimilarTovaList } from "../components";
 

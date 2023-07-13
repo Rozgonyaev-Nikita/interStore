@@ -1,4 +1,3 @@
-import { Stack, TextField } from "@mui/material";
 import classes from "./MyModal.module.css";
 import cn from "classnames";
 import React, { useEffect, useRef } from "react";
@@ -14,20 +13,18 @@ const MyModal: React.FC<IModal> = ({ isOpen, setOpen, children }) => {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.body.addEventListener(
-      "click",
-      (e: unknown): void => {
-        if (
-          !e.composedPath().includes(containerRef.current) &
-          e.composedPath().includes(divRef.current)
-        ) {
-          setOpen(false);
-          console.log(e.composedPath().includes(containerRef.current));
-        }
-      },
-      []
-    );
-  }, []);
+    document.body.addEventListener("click", (e: MouseEvent): void => {
+      if (
+        containerRef.current &&
+        divRef.current &&
+        !e.composedPath().includes(containerRef.current) &&
+        e.composedPath().includes(divRef.current)
+      ) {
+        setOpen(false);
+        console.log(e.composedPath().includes(containerRef.current));
+      }
+    });
+  }, [setOpen]);
 
   return (
     <div

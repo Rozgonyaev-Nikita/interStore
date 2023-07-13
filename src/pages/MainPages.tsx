@@ -1,17 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { AddTovar, TovarList } from "../components";
-import { MyModal, PaginationC, Skeleton } from "../UI";
+import { TovarList } from "../components";
+import { PaginationC, Skeleton } from "../UI";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import {
-  addTovarsThunk,
-  tovarsSelector,
-  tovarsThunk,
-} from "../store/FetchTovars";
+import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
 
 export const MainPages = () => {
   const [page, setPage] = useState<number>(0);
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
@@ -26,14 +21,12 @@ export const MainPages = () => {
   //   return data;
   // }
   // const {data: allTovars = [] as ITovar[], isLoading, isError} = useQuery('tovars', tovarsFetching, {refetchOnWindowFocus: false});
-  const addTovar = () => {
-    dispatch(addTovarsThunk());
-  };
+
   useEffect(() => {
     if (allTovars.length == 0) {
       dispatch(tovarsThunk());
     }
-  }, [dispatch]);
+  }, [allTovars.length, dispatch]);
 
   const tovars = useMemo(() => {
     if (searchParams.get("karp")) {
@@ -54,7 +47,6 @@ export const MainPages = () => {
 
   return (
     <>
-      <button onClick={() => setOpenModal(true)}>Добавить товар</button>
       {tovars.length !== 0 ? (
         <>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />

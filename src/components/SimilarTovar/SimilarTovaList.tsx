@@ -1,8 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
-import { useWhyDidYouUpdate } from "ahooks";
+import { FC, useEffect, useState } from "react";
 import { ITovar, ITovarProps } from "../../interface/tovar.interface";
 import axios from "axios";
-import SimilarTovaItem from "./SimilarTovaItem";
 import classes from "./SimilarTovar.module.scss";
 import { Link } from "react-router-dom";
 import { TovarItem } from "..";
@@ -27,6 +25,7 @@ const SimilarTovaList: FC<ITovarProps> = ({ tovar }) => {
 
   useEffect(() => {
     getSimilarTovars();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tovar]);
 
   return (

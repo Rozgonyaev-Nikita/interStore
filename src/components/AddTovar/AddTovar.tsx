@@ -9,14 +9,12 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ITovar } from "../../interface/tovar.interface";
 import { Add } from "@mui/icons-material";
-import axios from "axios";
-import { useDispatch } from "react-redux";
 import { useAppDispatch } from "../../hooks/reduxHooks";
-import { addTovarsThunk, tovarsThunkPost } from "../../store/FetchTovars";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { tovarsThunkPost } from "../../store/FetchTovars";
+import { useForm } from "react-hook-form";
 
 const initialTovar: ITovar = {
   id: 0,
@@ -39,7 +37,6 @@ type Inputs = {
 
 const AddTovar = () => {
   const [tovar, setTovar] = useState<ITovar>(initialTovar);
-  const [selectedFruit, setSelectedFruit] = useState("");
 
   const dispatch = useAppDispatch();
 
@@ -58,7 +55,7 @@ const AddTovar = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     console.log("caz", JSON.stringify(onSubmit));
   };
 
