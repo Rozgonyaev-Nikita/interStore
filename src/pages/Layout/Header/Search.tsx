@@ -17,7 +17,7 @@ export const SearchInp = () => {
 
   return (
     <>
-      <Search>
+      <Search className="mySearch">
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>

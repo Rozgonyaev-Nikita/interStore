@@ -46,7 +46,7 @@ export const BasketSide: FC<IDrawer> = ({ open, onClose }): JSX.Element => {
     <Drawer ref={DrawerRef} anchor="right" open={open} onClose={onClose}>
       <List ref={divRef} sx={{ width: "400px", height: "100%" }}>
         <ListItem alignItems="center">
-          <ListItemIcon>
+          <ListItemIcon onClick={onClose}>
             <ShoppingBasket
             // onClick={() => dispatch(OpenBasket(false))}
             />

@@ -48,7 +48,7 @@ const MenuC = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose1}>Profile</MenuItem>
+        <MenuItem onClick={handleClose1}>Добавить товар</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>

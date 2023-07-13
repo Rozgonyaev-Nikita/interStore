@@ -16,9 +16,14 @@ const ProductFull: FC<ITovartProps> = ({ tovar }) => {
     <>
       {tovar && (
         <div className={classes.container}>
-          <img src={image ? image : noTovar} alt="Товар" width={300} />
+          <img
+            src={image ? image : noTovar}
+            alt="Товар"
+            className={classes.image}
+            width={300}
+          />
           <div className={classes.grid}>
-            <h1>{title}</h1>
+            <h1 className={classes.h1}>{title}</h1>
             <Rating
               name="half-rating-read"
               defaultValue={2.5}

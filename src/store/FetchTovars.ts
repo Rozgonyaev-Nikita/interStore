@@ -94,6 +94,7 @@ const thunkTovarSlice = createSlice({
 });
 
 export const tovarsSelector = (state: RootState) => state.fetchTovar;
+export const statusSelector = (state: RootState) => state.fetchTovar.status;
 
 export const tovarByIdSelector = (id: number) => (state: RootState) =>
   state.fetchTovar.tovars.find((item) => item.id === id);
