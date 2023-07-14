@@ -1,4 +1,4 @@
-import { ShoppingBasket } from "@mui/icons-material";
+import { FavoriteBorder, ShoppingBasket } from "@mui/icons-material";
 import AppBar from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
@@ -10,6 +10,7 @@ import { BasketSide } from "../../../components/BasketSide/BasketSide";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import { SearchInp } from "./Search";
 import { Menu } from "../../../UI";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [isOpenBasket, setOpenBasket] = useState<boolean>(false);
@@ -26,6 +27,22 @@ export const Header = () => {
               Типо сайт
             </Typography>
             <SearchInp />
+            <Link to="/favourites">
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{
+                  ml: 1,
+                  marginLeft: "15px",
+                  // ...(isFavorites && { color: "red" }),
+                }}
+                // onClick={addFavourites}
+              >
+                <FavoriteBorder color="action" />
+              </IconButton>
+            </Link>
             <IconButton
               size="large"
               aria-label="account of current user"

@@ -7,12 +7,13 @@ import Typography from "@mui/material/Typography";
 import { FC, useEffect, useState } from "react";
 import { ITovar } from "../interface/tovar.interface";
 import IconButton from "@mui/material/IconButton";
-import { ShoppingBagOutlined } from "@mui/icons-material";
+import { FavoriteBorder, ShoppingBagOutlined } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { AddTovarInBasket } from "../store/ListProductsBasketSlice";
 import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import noTovar from "../assets/no_product.jpg";
+import { AddFavorites } from "../store/FavoritesTovars";
 
 interface ITovarItem {
   tovar: ITovar;
@@ -23,6 +24,7 @@ interface ITovarItem {
 const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
   // const [open, setOpen] = useState<boolean>(false);
   const [addedInBasket, setAddedInBasket] = useState<boolean>(false);
+  const [isFavorites, setFavorites] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
@@ -43,6 +45,10 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
     }
     dispatch(AddTovarInBasket(tovar));
     setAddedInBasket(true);
+  };
+  const addFavourites = () => {
+    dispatch(AddFavorites(tovar));
+    setFavorites(!isFavorites);
   };
 
   useEffect(() => {
@@ -83,21 +89,39 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
         </Typography>
       </CardContent>
       {isFull && (
-        <CardActions>
-          <Link to={`/${tovar.id}`}>
-            <Button size="small">Подробнее</Button>
-          </Link>
+        <CardActions
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <div style={{ minWidth: "160px" }}>
+            <Link to={`/${tovar.id}`}>
+              <Button size="small">Подробнее</Button>
+            </Link>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ ml: 1 }}
+              onClick={() => AddTovarBasket(tovar)}
+            >
+              <Badge badgeContent={countInBasket} color="secondary">
+                {shoppingBagIcon}
+              </Badge>
+            </IconButton>
+          </div>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ ml: 1 }}
-            onClick={() => AddTovarBasket(tovar)}
+            sx={{
+              ml: 1,
+              marginLeft: "15px",
+              ...(isFavorites && { color: "red" }),
+            }}
+            onClick={addFavourites}
           >
-            <Badge badgeContent={countInBasket} color="secondary">
-              {shoppingBagIcon}
-            </Badge>
+            <FavoriteBorder />
           </IconButton>
         </CardActions>
       )}

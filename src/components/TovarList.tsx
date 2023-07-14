@@ -7,11 +7,11 @@ import Alert from "@mui/material/Alert";
 
 interface ITovarA {
   tovars: ITovar[];
-  page: number;
-  ntip: number; // numberTovarsInPage
+  page?: number;
+  ntip?: number; // numberTovarsInPage
 }
 
-const TovarList: FC<ITovarA> = ({ tovars, page, ntip }) => {
+const TovarList: FC<ITovarA> = ({ tovars, page = 0, ntip = 8 }) => {
   const [open, setOpen] = useState<boolean>(false);
   console.log("lf", tovars);
   // const [searchParams, setSearchParams] = useSearchParams();

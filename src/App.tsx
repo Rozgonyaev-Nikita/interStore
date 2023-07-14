@@ -3,6 +3,7 @@ import { Layout } from "./pages/Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { MainPages } from "./pages/MainPages";
 import { ViewingProducts } from "./pages/ViewingProducts";
+import FavouritesPage from "./pages/FavouritesPage";
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<MainPages></MainPages>} />
         <Route path="/:id" element={<ViewingProducts />} />
-        {/* <Route path='about' element={<About />} />
-          <Route path='contacts' element={<Contacts />} />
+        <Route path="/favourites" element={<FavouritesPage />} />
+        {/* <Route path='contacts' element={<Contacts />} />
           <Route path='onas' element={<Onas />} />
           <Route path='*' element={<PageError />} /> */}
       </Route>

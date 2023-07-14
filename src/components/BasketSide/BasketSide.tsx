@@ -54,7 +54,9 @@ export const BasketSide: FC<IDrawer> = ({ open, onClose }): JSX.Element => {
           <ListItemText primary="Корзина" />
           <ListItemText
             primary={`Общая цена: `}
-            secondary={<span style={{ color: "red" }}>{totalPrice} $</span>}
+            secondary={
+              <span style={{ color: "red" }}>{Math.ceil(totalPrice)} $</span>
+            }
           />
         </ListItem>
         <Divider />
