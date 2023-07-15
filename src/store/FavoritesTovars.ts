@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ITovar } from "../interface/tovar.interface";
-import { Favorite } from "@mui/icons-material";
 import { RootState } from ".";
 
 interface IFavorites {

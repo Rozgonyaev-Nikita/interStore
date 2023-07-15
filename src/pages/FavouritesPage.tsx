@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/reduxHooks";
 import { favouritesSelector } from "../store/ListProductsBasketSlice";

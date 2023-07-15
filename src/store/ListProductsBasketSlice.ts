@@ -49,7 +49,11 @@ const listTovarsBasketSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (!favTovar) {
-        state.favoritesTovars.push({ ...action.payload, isFavoutites: true });
+        state.favoritesTovars.push({
+          ...action.payload,
+          isFavoutites: true,
+          count: 0,
+        });
         // state.tovars.push({ ...action.payload, isFavoutites: true });
       }
     },

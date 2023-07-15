@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { TovarList } from "../components";
-import { PaginationC, Skeleton } from "../UI";
+import { Skeleton } from "../UI";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
 
 export const MainPages = () => {
-  const [page, setPage] = useState<number>(0);
+  const [page] = useState<number>(0);
 
   const dispatch = useAppDispatch();
 
