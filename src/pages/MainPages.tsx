@@ -50,12 +50,12 @@ export const MainPages = () => {
       {tovars.length !== 0 ? (
         <>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />
-          <PaginationC
+          {/* <PaginationC
             tovars={tovars}
             page={page}
             setPage={setPage}
             ntip={numberTovarsInPage}
-          />
+          /> */}
         </>
       ) : (
         <div>Корзина пуста</div>

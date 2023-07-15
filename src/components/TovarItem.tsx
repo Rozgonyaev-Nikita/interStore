@@ -13,7 +13,10 @@ import { AddTovarInBasket } from "../store/ListProductsBasketSlice";
 import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import noTovar from "../assets/no_product.jpg";
-import { AddFavorites } from "../store/FavoritesTovars";
+import {
+  AddFavorites,
+  DeleteFavorites,
+} from "../store/ListProductsBasketSlice";
 
 interface ITovarItem {
   tovar: ITovar;
@@ -24,7 +27,12 @@ interface ITovarItem {
 const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
   // const [open, setOpen] = useState<boolean>(false);
   const [addedInBasket, setAddedInBasket] = useState<boolean>(false);
-  const [isFavorites, setFavorites] = useState<boolean>(false);
+  // const [isFavorites, setFavorites] = useState<boolean>(false);
+  const isFavorites = useAppSelector(
+    (state) =>
+      state.tovarsBasket.favoritesTovars.find((item) => item.id == tovar.id)
+        ?.isFavoutites
+  );
 
   const dispatch = useAppDispatch();
 
@@ -47,8 +55,12 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
     setAddedInBasket(true);
   };
   const addFavourites = () => {
-    dispatch(AddFavorites(tovar));
-    setFavorites(!isFavorites);
+    if (!isFavorites) {
+      dispatch(AddFavorites(tovar));
+    } else {
+      dispatch(DeleteFavorites(tovar.id));
+    }
+    // setFavorites(!isFavorites);
   };
 
   useEffect(() => {

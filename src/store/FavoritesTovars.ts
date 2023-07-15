@@ -18,7 +18,17 @@ const favoritesSlice = createSlice({
   initialState,
   reducers: {
     AddFavorites(state, action: PayloadAction<ITovar>) {
-      state.favoritesTovars.push(action.payload);
+      const favTovar = state.favoritesTovars.find(
+        (item) => item.id === action.payload.id
+      );
+      if (!favTovar) {
+        state.favoritesTovars.push(action.payload);
+      }
+    },
+    DeleteFavorites(state, action: PayloadAction<number>) {
+      state.favoritesTovars = state.favoritesTovars.filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
 });
@@ -26,5 +36,5 @@ const favoritesSlice = createSlice({
 export const favouritesSelector = (state: RootState) =>
   state.favorites.favoritesTovars;
 
-export const { AddFavorites } = favoritesSlice.actions;
+export const { AddFavorites, DeleteFavorites } = favoritesSlice.actions;
 export default favoritesSlice.reducer;

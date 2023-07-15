@@ -10,12 +10,24 @@ import { BasketSide } from "../../../components/BasketSide/BasketSide";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import { SearchInp } from "./Search";
 import { Menu } from "../../../UI";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [isOpenBasket, setOpenBasket] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log("location", location);
+
   const countAllTovars = useAppSelector((state) => state.tovarsBasket.countAll);
+
+  const redirectionFavouration = () => {
+    if (location.pathname == "/favourites") {
+      navigate("/");
+    } else {
+      navigate("/favourites");
+    }
+  };
 
   return (
     <>
@@ -27,22 +39,23 @@ export const Header = () => {
               Типо сайт
             </Typography>
             <SearchInp />
-            <Link to="/favourites">
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{
-                  ml: 1,
-                  marginLeft: "15px",
-                  // ...(isFavorites && { color: "red" }),
-                }}
-                // onClick={addFavourites}
-              >
-                <FavoriteBorder color="action" />
-              </IconButton>
-            </Link>
+
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{
+                ml: 1,
+                marginLeft: "15px",
+                // ...(isFavorites && { color: "red" }),
+              }}
+              onClick={redirectionFavouration}
+              // onClick={addFavourites}
+            >
+              <FavoriteBorder color="action" />
+            </IconButton>
+
             <IconButton
               size="large"
               aria-label="account of current user"

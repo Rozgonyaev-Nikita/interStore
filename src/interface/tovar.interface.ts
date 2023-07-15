@@ -10,6 +10,7 @@ export interface ITovar {
 
 export interface ITovarWithCount extends ITovar {
   count: number;
+  isFavoutites?: boolean;
 }
 
 export interface ITovarProps {
@@ -19,6 +20,7 @@ export interface ITovarProps {
 export interface ITovarsCount {
   tovars: ITovarWithCount[];
   countAll: number;
+  favoritesTovars: ITovarWithCount[];
 }
 
 interface IRating {
