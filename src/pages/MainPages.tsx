@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { TovarList } from "../components";
-import { Skeleton } from "../UI";
+import { Skeleton, SpringTest } from "../UI";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
@@ -60,6 +60,7 @@ export const MainPages = () => {
       ) : (
         <div>Корзина пуста</div>
       )}
+      <SpringTest></SpringTest>
     </>
   );
 };

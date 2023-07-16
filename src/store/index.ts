@@ -7,7 +7,6 @@ const store = configureStore({
   reducer: {
     tovarsBasket: ListProductsBasketSlice,
     fetchTovar: FetchTovars,
-    favorites: FavoritesSlice,
   },
 });
 

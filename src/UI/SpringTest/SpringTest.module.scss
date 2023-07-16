@@ -1,0 +1,28 @@
+.springDiv {
+  background-color: red;
+  display: inline-block;
+}
+.block {
+  background: green;
+  position: relative;
+  width: 100px;
+  height: 50px;
+}
+.block::after {
+  content: "";
+  position: absolute;
+  right: -45px;
+  top: 0;
+  bottom: 0;
+  border: 25px solid transparent;
+  border-left: 20px solid green;
+}
+.block::before {
+  content: "";
+  position: absolute;
+  left: -15px;
+  top: 0;
+  bottom: 0;
+  border: 25px solid transparent;
+  border-left: 20px solid green;
+}

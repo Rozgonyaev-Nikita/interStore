@@ -17,10 +17,12 @@ export const Header = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("location", location);
 
   const countAllTovars = useAppSelector((state) => state.tovarsBasket.countAll);
-
+  const isFavorites = useAppSelector(
+    (state) => state.tovarsBasket.favoritesTovars.length > 0
+  );
+  console.log(isFavorites);
   const redirectionFavouration = () => {
     if (location.pathname == "/favourites") {
       navigate("/");
@@ -48,12 +50,12 @@ export const Header = () => {
               sx={{
                 ml: 1,
                 marginLeft: "15px",
-                // ...(isFavorites && { color: "red" }),
+
+                color: "secondary",
               }}
               onClick={redirectionFavouration}
-              // onClick={addFavourites}
             >
-              <FavoriteBorder color="action" />
+              <FavoriteBorder sx={{ ...(isFavorites && { color: "blue" }) }} />
             </IconButton>
 
             <IconButton
