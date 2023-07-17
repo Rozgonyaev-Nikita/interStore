@@ -60,7 +60,6 @@ export const MainPages = () => {
       ) : (
         <div>Корзина пуста</div>
       )}
-      <SpringTest></SpringTest>
     </>
   );
 };
