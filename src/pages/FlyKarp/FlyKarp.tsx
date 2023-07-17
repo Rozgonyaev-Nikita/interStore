@@ -1,4 +1,3 @@
-import React from "react";
 import { SpringTest } from "../../UI";
 
 const FlyPost = () => {

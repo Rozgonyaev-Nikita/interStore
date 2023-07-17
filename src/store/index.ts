@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import ListProductsBasketSlice from "./ListProductsBasketSlice";
 import FetchTovars from "./FetchTovars";
-import FavoritesSlice from "./FavoritesTovars";
 
 const store = configureStore({
   reducer: {
