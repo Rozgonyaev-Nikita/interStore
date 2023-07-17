@@ -44,3 +44,21 @@ main {
     width: 150px;
   }
 }
+.info {
+  display: none !important;
+}
+
+@media (max-width: 750px) {
+  .info {
+    display: inline-block !important;
+  }
+  .detailed {
+    display: none;
+  }
+  .favourites {
+    margin-left: 0px !important;
+  }
+  .iconItem {
+    margin-left: 0px !important;
+  }
+}

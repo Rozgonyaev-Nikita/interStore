@@ -13,6 +13,7 @@ import { AddTovarInBasket } from "../store/ListProductsBasketSlice";
 import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import noTovar from "../assets/no_product.jpg";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import {
   AddFavorites,
   DeleteFavorites,
@@ -102,10 +103,13 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
       </CardContent>
       {isFull && (
         <CardActions
-          style={{ display: "flex", justifyContent: "space-between" }}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
         >
-          <div style={{ minWidth: "160px" }}>
-            <Link to={`/${tovar.id}`}>
+          <div style={{ maxWidth: "160px" }}>
+            <Link to={`/${tovar.id}`} className="detailed">
               <Button size="small">Подробнее</Button>
             </Link>
             <IconButton
@@ -113,6 +117,18 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
               edge="start"
               color="inherit"
               aria-label="menu"
+              sx={{ ml: 1 }}
+              className="info iconItem"
+              onClick={() => AddTovarBasket(tovar)}
+            >
+              <InfoOutlinedIcon />
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              className="iconItem"
               sx={{ ml: 1 }}
               onClick={() => AddTovarBasket(tovar)}
             >
@@ -126,6 +142,7 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
             edge="start"
             color="inherit"
             aria-label="menu"
+            className="iconItem favourites"
             sx={{
               ml: 1,
               marginLeft: "15px",
