@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { MainPages } from "./pages/MainPages";
 import { ViewingProducts } from "./pages/ViewingProducts";
 import FavouritesPage from "./pages/FavouritesPage";
+import FlyKarp from "./pages/FlyKarp/FlyKarp";
 
 function App() {
   return (
@@ -13,9 +14,9 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<MainPages></MainPages>} />
         <Route path="/:id" element={<ViewingProducts />} />
-        <Route path="/favourites" element={<FavouritesPage />} />
-        {/* <Route path='contacts' element={<Contacts />} />
-          <Route path='onas' element={<Onas />} />
+        <Route path="favourites" element={<FavouritesPage />} />
+        <Route path="flyKarp" element={<FlyKarp />} />
+        {/* <Route path='onas' element={<Onas />} />
           <Route path='*' element={<PageError />} /> */}
       </Route>
     </Routes>

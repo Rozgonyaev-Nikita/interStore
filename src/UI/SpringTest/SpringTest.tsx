@@ -3,17 +3,24 @@ import classes from "./SpringTest.module.scss";
 
 function MyComponent() {
   const props = useSpring({
-    from: { transform: "translateX(3vw) rotate(0deg)" },
-    to: { transform: "translateX(82vw) rotate(360deg)" },
+    from: { transform: "rotate(0deg)", marginLeft: "0%" },
+    to: { transform: "rotate(360deg)", marginLeft: "90%" },
     loop: { reverse: true },
     delay: 500,
     config: {
-      duration: 3000,
+      duration: 2000,
     },
   });
 
   return (
-    <div style={{ width: "100%" }}>
+    <div
+      style={{
+        width: "90%",
+        marginLeft: "20px",
+        height: "50px",
+        position: "relative",
+      }}
+    >
       <animated.div className={classes.springDiv} style={props}>
         <div className={classes.block}></div>
       </animated.div>
