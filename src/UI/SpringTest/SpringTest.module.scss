@@ -1,6 +1,8 @@
 .springDiv {
   background-color: red;
+  position: absolute;
   display: inline-block;
+  width: 120px;
 }
 .block {
   background: green;
@@ -25,4 +27,22 @@
   bottom: 0;
   border: 25px solid transparent;
   border-left: 20px solid green;
+}
+
+.widthg {
+  width: 250px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
