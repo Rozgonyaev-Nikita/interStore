@@ -14,6 +14,7 @@ import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import noTovar from "../assets/no_product.jpg";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { useNavigate } from "react-router-dom";
 import {
   AddFavorites,
   DeleteFavorites,
@@ -36,6 +37,8 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
   );
 
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   const countInBasket = useAppSelector(
     (state) =>
@@ -62,6 +65,9 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
       dispatch(DeleteFavorites(tovar.id));
     }
     // setFavorites(!isFavorites);
+  };
+  const detailetNavigate = () => {
+    navigate(`/${tovar.id}`);
   };
 
   useEffect(() => {
@@ -108,7 +114,13 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
             justifyContent: "space-between",
           }}
         >
-          <div style={{ maxWidth: "160px" }}>
+          <div
+            style={{
+              maxWidth: "200px",
+
+              // width: "100px",
+            }}
+          >
             <Link to={`/${tovar.id}`} className="detailed">
               <Button size="small">Подробнее</Button>
             </Link>
@@ -119,7 +131,7 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
               aria-label="menu"
               sx={{ ml: 1 }}
               className="info iconItem"
-              onClick={() => AddTovarBasket(tovar)}
+              onClick={detailetNavigate}
             >
               <InfoOutlinedIcon />
             </IconButton>
@@ -128,7 +140,7 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
               edge="start"
               color="inherit"
               aria-label="menu"
-              className="iconItem"
+              className="iconItem korzinaIcon"
               sx={{ ml: 1 }}
               onClick={() => AddTovarBasket(tovar)}
             >
