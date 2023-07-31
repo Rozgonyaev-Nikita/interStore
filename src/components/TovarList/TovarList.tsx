@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
-import { ITovar } from "../interface/tovar.interface";
-import { TovarItem } from "./index";
+import { ITovar } from "../../interface/tovar.interface";
+import { TovarItem } from "../index";
 // import { useSearchParams } from 'react-router-dom'
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import PaginationC from "../UI/PaginationC/PaginationC";
+import PaginationC from "../../UI/PaginationC/PaginationC";
 
 interface ITovarA {
   tovars: ITovar[];
@@ -16,7 +16,7 @@ const TovarList: FC<ITovarA> = ({ tovars, ntip = 8 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
 
-  console.log("lf", tovars);
+  // console.log("lf", tovars);
   // const [searchParams, setSearchParams] = useSearchParams();
 
   return (

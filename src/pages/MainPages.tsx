@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { TovarList } from "../components";
+import { TestCompon, TovarList } from "../components";
 import { Skeleton } from "../UI";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";

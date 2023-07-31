@@ -1,0 +1,36 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Accordion test > should show title all the timejkS 1`] = `
+<div
+  class="accordion"
+  data-testid="div-accord"
+>
+  <h3
+    class="accordion-title"
+  >
+    Testing
+  </h3>
+  <div
+    class="accordion-content"
+  >
+    <div
+      title="di"
+    >
+      <h3>
+        Content
+      </h3>
+      <div
+        role="generic"
+      >
+        fh
+      </div>
+    </div>
+  </div>
+  <p>
+    List void
+  </p>
+  <title>
+    Testing
+  </title>
+</div>
+`;
