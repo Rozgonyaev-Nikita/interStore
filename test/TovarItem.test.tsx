@@ -61,6 +61,5 @@ describe("Counter test", () => {
     const firstLiInDiv = document.body.getAttribute("class");
     // const ln = document.getElementsByClassName("detailed");
     // console.log(screen.getByRole("link").className);
-    console.log(firstLiInDiv);
   });
 });

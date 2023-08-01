@@ -21,7 +21,7 @@ export const tovarsThunkPost = createAsyncThunk(
           price: tovar.price,
           description: tovar.description,
           // image: "https://i.pravatar.cc",
-          category: "other",
+          category: tovar.category,
         }
       );
       console.log("dgkarp", tovar);

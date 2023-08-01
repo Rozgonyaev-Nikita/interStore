@@ -66,7 +66,7 @@ describe("TovarList Test", () => {
     const list = screen.getByRole("list");
     expect(list).toBeDefined();
   });
-  test("Тест на отрисовку компонента TovarListdg", async () => {
+  test("Тест на совпадение карточек и элементов массива", async () => {
     renderCompon(<TovarList tovars={tovars}></TovarList>);
     const list = document.querySelector(".itemsGrid");
     expect(list?.childElementCount).toBe(tovars.length);

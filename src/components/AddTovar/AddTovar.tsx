@@ -157,6 +157,7 @@ const AddTovar = () => {
             <InputLabel id="sl">Категория</InputLabel>
             <Select
               id="sl"
+              data-testid="selectForm"
               name="mySelect"
               value={tovar.category}
               onChange={(e) => setTovar({ ...tovar, category: e.target.value })}
@@ -179,6 +180,7 @@ const AddTovar = () => {
               endIcon={<Add />}
               onClick={addNewTovar}
               disabled={!isValid}
+              data-testid="buttonAddTovar"
             >
               Добавить
             </Button>
