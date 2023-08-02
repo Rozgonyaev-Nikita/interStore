@@ -4,10 +4,17 @@ import { Skeleton, Sort } from "../UI";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
+import { ITovar } from "../interface/tovar.interface";
+
+interface IType {
+  title: "string";
+  description: "string";
+  category: "string";
+}
 
 export const MainPages = () => {
   const [page] = useState<number>(0);
-  const [category, setCategory] = useState<string>("default");
+  const [categor, setCategory] = useState<string>("id");
 
   const dispatch = useAppDispatch();
 
@@ -22,23 +29,49 @@ export const MainPages = () => {
   //   return data;
   // }
   // const {data: allTovars = [] as ITovar[], isLoading, isError} = useQuery('tovars', tovarsFetching, {refetchOnWindowFocus: false});
-  console.log("categ", category);
+
   useEffect(() => {
     if (allTovars.length == 0) {
       dispatch(tovarsThunk());
     }
-  }, [allTovars.length, dispatch]);
+  }, [allTovars.length, dispatch, categor]);
 
-  const tovars = useMemo(() => {
-    if (searchParams.get("karp")) {
-      return allTovars.filter((items) =>
-        items.title.toLowerCase().includes(searchParams.get("karp") || "")
-      );
+  const tovars: ITovar[] = useMemo(() => {
+    if (categor !== "id") {
+      if (searchParams.get("karp")) {
+        return [...allTovars]
+          .filter((items) =>
+            items.title.toLowerCase().includes(searchParams.get("karp") || "")
+          )
+          .sort((a, b) =>
+            String(a[categor as keyof IType]).localeCompare(
+              String(b[categor as keyof IType])
+            )
+          );
+      } else {
+        searchParams.delete("karp");
+
+        return [...allTovars].sort((a, b) =>
+          String(a[categor as keyof IType]).localeCompare(
+            String(b[categor as keyof IType])
+          )
+        );
+      }
+    } else {
+      if (searchParams.get("karp")) {
+        return [...allTovars]
+          .filter((items) =>
+            items.title.toLowerCase().includes(searchParams.get("karp") || "")
+          )
+          .sort((a, b) => a.id - b.id);
+      } else {
+        searchParams.delete("karp");
+
+        return [...allTovars].sort((a, b) => a.id - b.id);
+      }
     }
-    searchParams.delete("karp");
-    return allTovars;
-  }, [allTovars, searchParams]);
-
+  }, [allTovars, searchParams, categor]);
+  console.log("allT", tovars);
   if (status === "pending") {
     return <Skeleton count={numberTovarsInPage}></Skeleton>;
   }
@@ -56,7 +89,7 @@ export const MainPages = () => {
               { value: "description", name: "По описанию" },
               { value: "category", name: "По категории" },
             ]}
-            select={category}
+            select={categor}
             setSelect={setCategory}
           ></Sort>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />
