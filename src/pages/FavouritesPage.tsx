@@ -8,7 +8,14 @@ const FavoritesPage = () => {
 
   const navigate = useNavigate();
   if (favourites.length == 0) {
-    return <p>Пусто</p>;
+    return (
+      <>
+        <button onClick={() => navigate("/")} style={{ marginBottom: "15px" }}>
+          Назад
+        </button>
+        <p>Пусто</p>
+      </>
+    );
   }
   return (
     <div>

@@ -21,7 +21,7 @@ const TovarList: FC<ITovarA> = ({ tovars, ntip = 8 }) => {
 
   return (
     <>
-      <div className="itemsGrid">
+      <div className="listGrid">
         {tovars.slice(page * ntip, page * ntip + ntip).map((tovar) => (
           <TovarItem
             tovar={tovar}

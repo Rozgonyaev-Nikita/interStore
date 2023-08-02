@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { TestCompon, TovarList } from "../components";
-import { Skeleton } from "../UI";
+import { Skeleton, Sort } from "../UI";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
 
 export const MainPages = () => {
   const [page] = useState<number>(0);
+  const [category, setCategory] = useState<string>("default");
 
   const dispatch = useAppDispatch();
 
@@ -21,7 +22,7 @@ export const MainPages = () => {
   //   return data;
   // }
   // const {data: allTovars = [] as ITovar[], isLoading, isError} = useQuery('tovars', tovarsFetching, {refetchOnWindowFocus: false});
-
+  console.log("categ", category);
   useEffect(() => {
     if (allTovars.length == 0) {
       dispatch(tovarsThunk());
@@ -39,7 +40,7 @@ export const MainPages = () => {
   }, [allTovars, searchParams]);
 
   if (status === "pending") {
-    return <Skeleton></Skeleton>;
+    return <Skeleton count={numberTovarsInPage}></Skeleton>;
   }
   if (status === "failed") {
     return <p>Ошибка сервера. Жалька</p>;
@@ -49,6 +50,15 @@ export const MainPages = () => {
     <>
       {tovars.length !== 0 ? (
         <>
+          <Sort
+            options={[
+              { value: "title", name: "По заголовку" },
+              { value: "description", name: "По описанию" },
+              { value: "category", name: "По категории" },
+            ]}
+            select={category}
+            setSelect={setCategory}
+          ></Sort>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />
           {/* <PaginationC
             tovars={tovars}
