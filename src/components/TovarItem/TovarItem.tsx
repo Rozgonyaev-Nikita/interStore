@@ -27,6 +27,7 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
         image={tovar.image ? tovar.image : noTovar}
         title={tovar.title}
       />
+
       <CardContent>
         <Typography
           gutterBottom
@@ -35,6 +36,14 @@ const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
           sx={{ height: 60, overflow: "hidden" }}
         >
           {tovar.title}
+        </Typography>
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="div"
+          // sx={{ height: 60, overflow: "hidden" }}
+        >
+          Цена: <span style={{ color: "red" }}>{tovar.price}</span> $
         </Typography>
         <Typography
           variant="body2"

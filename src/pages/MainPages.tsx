@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { TovarList } from "../components";
+import { FilterAndSort, TovarList } from "../components";
 import { Skeleton, Sort } from "../UI";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
@@ -39,15 +39,10 @@ export const MainPages = () => {
     <>
       {tovars.length !== 0 ? (
         <>
-          <Sort
-            options={[
-              { value: "title", name: "По заголовку" },
-              { value: "description", name: "По описанию" },
-              { value: "category", name: "По категории" },
-            ]}
-            select={categor}
-            setSelect={setCategory}
-          ></Sort>
+          <FilterAndSort
+            categor={categor}
+            setCategory={setCategory}
+          ></FilterAndSort>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />
           {/* <PaginationC
             tovars={tovars}
