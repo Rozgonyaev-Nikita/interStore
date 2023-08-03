@@ -8,3 +8,9 @@ interface IOption {
   value: string;
   name: string;
 }
+
+export interface IType {
+  title: "string";
+  description: "string";
+  category: "string";
+}
