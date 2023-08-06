@@ -6,37 +6,27 @@ export const sortFilterTovars = (
   allTovars: ITovar[],
   searchParams: URLSearchParams
 ): ITovar[] => {
+  const tovar = findFilter(allTovars, searchParams);
   if (categor !== "id" && categor !== "price") {
-    if (searchParams) {
-      return [...allTovars]
-        .filter((items) =>
-          items.title.toLowerCase().includes(searchParams.get("karp") || "")
-        )
-        .sort((a, b) =>
-          String(a[categor as keyof IType]).localeCompare(
-            String(b[categor as keyof IType])
-          )
-        );
-    } else {
-      // searchParams.delete("karp");
-
-      return [...allTovars].sort((a, b) =>
-        String(a[categor as keyof IType]).localeCompare(
-          String(b[categor as keyof IType])
-        )
-      );
-    }
+    return [...tovar].sort((a, b) =>
+      String(a[categor as keyof IType]).localeCompare(
+        String(b[categor as keyof IType])
+      )
+    );
   } else {
-    if (searchParams.get("karp")) {
-      return [...allTovars]
-        .filter((items) =>
-          items.title.toLowerCase().includes(searchParams.get("karp") || "")
-        )
-        .sort((a, b) => a[categor] - b[categor]);
-    } else {
-      searchParams.delete("karp");
-
-      return [...allTovars].sort((a, b) => a[categor] - b[categor]);
-    }
+    return [...tovar].sort((a, b) => a[categor] - b[categor]);
   }
+};
+
+const findFilter = (allTovars: ITovar[], searchParams: URLSearchParams) => {
+  let karp;
+  if (searchParams) {
+    karp = [...allTovars].filter((items) =>
+      items.title.toLowerCase().includes(searchParams.get("karp") || "")
+    );
+  } else {
+    // searchParams.delete("karp");
+    karp = allTovars;
+  }
+  return karp;
 };

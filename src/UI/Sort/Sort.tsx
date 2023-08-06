@@ -6,7 +6,7 @@ const Sort: React.FC<IOptions> = ({ options, select, setSelect }) => {
   return (
     <>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="sl">Сортировкап</InputLabel>
+        <InputLabel id="sl">Сортировка</InputLabel>
         <Select
           id="sl"
           data-testid="selectForm"
