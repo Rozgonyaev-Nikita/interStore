@@ -5,10 +5,10 @@ export const sortFilterTovars = (
   categor: string | number,
   allTovars: ITovar[],
   searchParams: URLSearchParams,
-  filterCategor: string
+  filterCategor: string[]
 ): ITovar[] => {
   const tovar1 = findFilter(allTovars, searchParams);
-  const tovar = filterCategory(filterCategor, allTovars);
+  const tovar = filterCategory(filterCategor, tovar1);
   if (categor !== "id" && categor !== "price") {
     return [...tovar].sort((a, b) =>
       String(a[categor as keyof IType]).localeCompare(
@@ -33,10 +33,24 @@ const findFilter = (allTovars: ITovar[], searchParams: URLSearchParams) => {
   return karp;
 };
 
-const filterCategory = (filterCategor: string, tovars: ITovar[]): ITovar[] => {
+const filterCategory = (
+  filterCategor: string[],
+  tovars: ITovar[]
+): ITovar[] => {
   const filterTovars = tovars;
-  if (filterCategor !== "all") {
-    return filterTovars.filter((item) => item.category === filterCategor);
+  let arr: ITovar[] = [];
+  console.log("filterTovars", filterTovars);
+  if (filterCategor.length) {
+    console.log("dh", filterCategor);
+    for (let i = 0; i < filterCategor.length; i++) {
+      arr = arr.concat(
+        filterTovars.filter((item) => item.category === filterCategor[i])
+      );
+      console.log("arr", arr);
+    }
+
+    return arr;
+    // return filterTovars.filter((item) => item.category === filterCategor);
   }
   return filterTovars;
 };

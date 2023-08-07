@@ -4,12 +4,11 @@ import womenClothing from "../../assets/womenClothing.jpg";
 import electronics from "../../assets/electronics.jpg";
 import jewelery from "../../assets/jewelery.jpg";
 import otherTovar from "../../assets/otherTovar.jpg";
-import cancel from "../../assets/cancel.png";
 import classes from "./Сategories.module.css";
 
 interface IСategories {
-  setFilterCategory: (category: string) => void;
-  filterCategory: string;
+  setFilterCategory: (category: string[]) => void;
+  filterCategory: string[];
 }
 
 const Сategories: React.FC<IСategories> = ({
@@ -22,7 +21,6 @@ const Сategories: React.FC<IСategories> = ({
     electronics,
     jewelery,
     otherTovar,
-    cancel,
   ];
   const categoriesFilter: string[] = [
     "men's clothing",
@@ -30,7 +28,6 @@ const Сategories: React.FC<IСategories> = ({
     "electronics",
     "jewelery",
     "other",
-    "all",
   ];
   const label = [
     "Мужская одежда",
@@ -38,8 +35,25 @@ const Сategories: React.FC<IСategories> = ({
     "Электроника",
     "Драгоценности",
     "Другое",
-    "Все товары",
   ];
+  console.log("index", filterCategory);
+  const myFilter = (index: number) => {
+    const newFilterCategory = [...filterCategory]; // создаем копию массива filterCategory
+
+    if (newFilterCategory.includes(categoriesFilter[index])) {
+      newFilterCategory.splice(
+        newFilterCategory.indexOf(categoriesFilter[index]),
+        1
+      );
+    } else {
+      newFilterCategory.push(categoriesFilter[index]);
+    }
+    setFilterCategory(newFilterCategory);
+    console.log("catIndex", categoriesFilter[index]);
+  };
+  //
+  ////
+  //
 
   return (
     <div className={classes.wrapper}>
@@ -47,7 +61,7 @@ const Сategories: React.FC<IСategories> = ({
         <div
           className={classes.card}
           key={index}
-          onClick={() => setFilterCategory(categoriesFilter[index])}
+          onClick={() => myFilter(index)}
         >
           <img
             src={category}
@@ -58,7 +72,9 @@ const Сategories: React.FC<IСategories> = ({
           <p
             className={
               (classes.label,
-              filterCategory === categoriesFilter[index] ? classes.p : "")
+              filterCategory.find((item) => item === categoriesFilter[index])
+                ? classes.p
+                : "")
             }
           >
             {label[index]}

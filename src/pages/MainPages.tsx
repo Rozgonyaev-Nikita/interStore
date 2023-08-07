@@ -10,7 +10,7 @@ import { useSearchParams } from "react-router-dom";
 export const MainPages = () => {
   const [page] = useState<number>(0);
   const [categor, setCategory] = useState<string>("id");
-  const [filterCategory, setFilterCategory] = useState<string>("all");
+  const [filterCategory, setFilterCategory] = useState<string[]>([]);
   const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   // const params = new URLSearchParams(document.location.search);
@@ -18,7 +18,7 @@ export const MainPages = () => {
 
   const numberTovarsInPage = 8;
 
-  console.log("filtercateg", filterCategory);
+  // console.log("filtercateg", filterCategory);
   useEffect(() => {
     if (allTovars.length == 0) {
       dispatch(tovarsThunk());
