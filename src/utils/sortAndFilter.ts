@@ -4,9 +4,11 @@ import { ITovar } from "../interface/tovar.interface";
 export const sortFilterTovars = (
   categor: string | number,
   allTovars: ITovar[],
-  searchParams: URLSearchParams
+  searchParams: URLSearchParams,
+  filterCategor: string
 ): ITovar[] => {
-  const tovar = findFilter(allTovars, searchParams);
+  const tovar1 = findFilter(allTovars, searchParams);
+  const tovar = filterCategory(filterCategor, allTovars);
   if (categor !== "id" && categor !== "price") {
     return [...tovar].sort((a, b) =>
       String(a[categor as keyof IType]).localeCompare(
@@ -29,4 +31,12 @@ const findFilter = (allTovars: ITovar[], searchParams: URLSearchParams) => {
     karp = allTovars;
   }
   return karp;
+};
+
+const filterCategory = (filterCategor: string, tovars: ITovar[]): ITovar[] => {
+  const filterTovars = tovars;
+  if (filterCategor !== "all") {
+    return filterTovars.filter((item) => item.category === filterCategor);
+  }
+  return filterTovars;
 };

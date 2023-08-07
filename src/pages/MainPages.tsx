@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FilterAndSort, TovarList } from "../components";
-import { Skeleton, Sort } from "../UI";
+import { Skeleton, Sort, Сategories } from "../UI";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
 import { sortFilterTovars } from "../utils/sortAndFilter";
@@ -10,6 +10,7 @@ import { useSearchParams } from "react-router-dom";
 export const MainPages = () => {
   const [page] = useState<number>(0);
   const [categor, setCategory] = useState<string>("id");
+  const [filterCategory, setFilterCategory] = useState<string>("all");
   const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   // const params = new URLSearchParams(document.location.search);
@@ -17,15 +18,16 @@ export const MainPages = () => {
 
   const numberTovarsInPage = 8;
 
+  console.log("filtercateg", filterCategory);
   useEffect(() => {
     if (allTovars.length == 0) {
       dispatch(tovarsThunk());
     }
-  }, [allTovars.length, dispatch, categor]);
+  }, [allTovars.length, dispatch, categor, filterCategory]);
 
   const tovars: ITovar[] = useMemo(
-    () => sortFilterTovars(categor, allTovars, searchParams),
-    [categor, allTovars, searchParams]
+    () => sortFilterTovars(categor, allTovars, searchParams, filterCategory),
+    [categor, allTovars, searchParams, filterCategory]
   );
 
   if (status === "pending") {
@@ -37,6 +39,10 @@ export const MainPages = () => {
 
   return (
     <>
+      <Сategories
+        filterCategory={filterCategory}
+        setFilterCategory={setFilterCategory}
+      />
       {tovars.length !== 0 ? (
         <>
           <FilterAndSort

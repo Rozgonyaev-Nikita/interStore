@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  padding-right: 30px;
+  margin-bottom: 10px;
+}
+.card:hover {
+  /* padding-right: 30px;
+  margin-bottom: 10px; */
+  scale: 1.05;
+}
+
+.img {
+  height: 120px;
+}
+
+.label {
+  margin-block: 0px;
+  text-align: center;
+}
+.p {
+  border-bottom: 4px solid red;
+  width: 100%;
+  transition: 0.5s;
+}

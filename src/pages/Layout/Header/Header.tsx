@@ -22,7 +22,6 @@ export const Header = () => {
   const isFavorites = useAppSelector(
     (state) => state.tovarsBasket.favoritesTovars.length > 0
   );
-  console.log(isFavorites);
   const redirectionFavouration = () => {
     if (location.pathname == "/favourites") {
       navigate("/");
