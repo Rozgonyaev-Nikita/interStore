@@ -4,7 +4,7 @@ import womenClothing from "../../assets/womenClothing.jpg";
 import electronics from "../../assets/electronics.jpg";
 import jewelery from "../../assets/jewelery.jpg";
 import otherTovar from "../../assets/otherTovar.jpg";
-import classes from "./Сategories.module.css";
+import classes from "./Categories.module.css";
 
 interface IСategories {
   setFilterCategory: (category: string[]) => void;

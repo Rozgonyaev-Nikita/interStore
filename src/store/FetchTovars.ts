@@ -99,5 +99,10 @@ export const statusSelector = (state: RootState) => state.fetchTovar.status;
 export const tovarByIdSelector = (id: number) => (state: RootState) =>
   state.fetchTovar.tovars.find((item) => item.id === id);
 
+export const maxPriceSelector = (state: RootState) => {
+  const karp: number[] = [...state.fetchTovar.tovars].map((item) => item.price);
+  return Math.max(...karp);
+};
+
 const { addTovar } = thunkTovarSlice.actions;
 export default thunkTovarSlice.reducer;

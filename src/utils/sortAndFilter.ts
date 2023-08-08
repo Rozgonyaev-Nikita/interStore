@@ -40,7 +40,6 @@ const filterCategory = (
   const filterTovars = tovars;
   let arr: ITovar[] = [];
   if (filterCategor.length) {
-    console.log("dh", filterCategor);
     for (let i = 0; i < filterCategor.length; i++) {
       arr = arr.concat(
         filterTovars.filter((item) => item.category === filterCategor[i])
