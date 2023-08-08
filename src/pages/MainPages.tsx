@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FilterAndSort, TovarList } from "../components";
-import { Skeleton, Sort, Сategories } from "../UI";
+import { Skeleton, Sort, Categories } from "../UI";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
 import { sortFilterTovars } from "../utils/sortAndFilter";
@@ -9,6 +9,7 @@ import { useSearchParams } from "react-router-dom";
 
 export const MainPages = () => {
   const [page] = useState<number>(0);
+  const [sort, setSort] = useState({ categor: "id", filterCategory: [] });
   const [categor, setCategory] = useState<string>("id");
   const [filterCategory, setFilterCategory] = useState<string[]>([]);
   const [searchParams] = useSearchParams();
@@ -29,6 +30,7 @@ export const MainPages = () => {
     () => sortFilterTovars(categor, allTovars, searchParams, filterCategory),
     [categor, allTovars, searchParams, filterCategory]
   );
+  const currentTovars = Math.max(...tovars.map((item) => item.price));
   console.log("main render");
 
   if (status === "pending") {
@@ -40,16 +42,15 @@ export const MainPages = () => {
 
   return (
     <>
-      <Сategories
+      <FilterAndSort
+        categor={categor}
+        setCategory={setCategory}
         filterCategory={filterCategory}
         setFilterCategory={setFilterCategory}
-      />
+        currentTovars={currentTovars}
+      ></FilterAndSort>
       {tovars.length !== 0 ? (
         <>
-          <FilterAndSort
-            categor={categor}
-            setCategory={setCategory}
-          ></FilterAndSort>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />
           {/* <PaginationC
             tovars={tovars}
