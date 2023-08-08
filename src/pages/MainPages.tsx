@@ -29,6 +29,7 @@ export const MainPages = () => {
     () => sortFilterTovars(categor, allTovars, searchParams, filterCategory),
     [categor, allTovars, searchParams, filterCategory]
   );
+  console.log("main render");
 
   if (status === "pending") {
     return <Skeleton count={numberTovarsInPage}></Skeleton>;

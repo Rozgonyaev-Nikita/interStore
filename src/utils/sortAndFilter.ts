@@ -39,14 +39,12 @@ const filterCategory = (
 ): ITovar[] => {
   const filterTovars = tovars;
   let arr: ITovar[] = [];
-  console.log("filterTovars", filterTovars);
   if (filterCategor.length) {
     console.log("dh", filterCategor);
     for (let i = 0; i < filterCategor.length; i++) {
       arr = arr.concat(
         filterTovars.filter((item) => item.category === filterCategor[i])
       );
-      console.log("arr", arr);
     }
 
     return arr;

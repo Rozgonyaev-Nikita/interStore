@@ -70,12 +70,12 @@ const Сategories: React.FC<IСategories> = ({
             className={classes.img}
           />
           <p
-            className={
-              (classes.label,
+            className={[
+              classes.label,
               filterCategory.find((item) => item === categoriesFilter[index])
                 ? classes.p
-                : "")
-            }
+                : "",
+            ].join(" ")}
           >
             {label[index]}
           </p>
