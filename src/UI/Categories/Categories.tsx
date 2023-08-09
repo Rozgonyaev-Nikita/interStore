@@ -1,20 +1,19 @@
-import React from "react";
 import mensClothing from "../../assets/mensClothing.jpg";
 import womenClothing from "../../assets/womenClothing.jpg";
 import electronics from "../../assets/electronics.jpg";
 import jewelery from "../../assets/jewelery.jpg";
 import otherTovar from "../../assets/otherTovar.jpg";
 import classes from "./Categories.module.css";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import {
+  changeFilterCategory,
+  filterSortSelector,
+} from "../../store/FilterSortSlice";
 
-interface IСategories {
-  setFilterCategory: (category: string[]) => void;
-  filterCategory: string[];
-}
+const Сategories = () => {
+  const { filterCategory } = useAppSelector(filterSortSelector);
+  const dispatch = useAppDispatch();
 
-const Сategories: React.FC<IСategories> = ({
-  setFilterCategory,
-  filterCategory,
-}) => {
   const categories = [
     mensClothing,
     womenClothing,
@@ -37,23 +36,6 @@ const Сategories: React.FC<IСategories> = ({
     "Другое",
   ];
   console.log("index", filterCategory);
-  const myFilter = (index: number) => {
-    const newFilterCategory = [...filterCategory]; // создаем копию массива filterCategory
-
-    if (newFilterCategory.includes(categoriesFilter[index])) {
-      newFilterCategory.splice(
-        newFilterCategory.indexOf(categoriesFilter[index]),
-        1
-      );
-    } else {
-      newFilterCategory.push(categoriesFilter[index]);
-    }
-    setFilterCategory(newFilterCategory);
-    console.log("catIndex", categoriesFilter[index]);
-  };
-  //
-  ////
-  //
 
   return (
     <div className={classes.wrapper}>
@@ -61,7 +43,7 @@ const Сategories: React.FC<IСategories> = ({
         <div
           className={classes.card}
           key={index}
-          onClick={() => myFilter(index)}
+          onClick={() => dispatch(changeFilterCategory(index))}
         >
           <img
             src={category}

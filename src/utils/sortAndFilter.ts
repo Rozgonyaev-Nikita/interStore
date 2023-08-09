@@ -1,14 +1,14 @@
-import { IType } from "../interface/other.interface";
+import { ISort, IType } from "../interface/other.interface";
 import { ITovar } from "../interface/tovar.interface";
 
 export const sortFilterTovars = (
-  categor: string | number,
   allTovars: ITovar[],
   searchParams: URLSearchParams,
-  filterCategor: string[]
+  filterSort: ISort
 ): ITovar[] => {
+  const { categor, filterCategory } = filterSort;
   const tovar1 = findFilter(allTovars, searchParams);
-  const tovar = filterCategory(filterCategor, tovar1);
+  const tovar = filterCategori(filterCategory, tovar1);
   if (categor !== "id" && categor !== "price") {
     return [...tovar].sort((a, b) =>
       String(a[categor as keyof IType]).localeCompare(
@@ -33,7 +33,7 @@ const findFilter = (allTovars: ITovar[], searchParams: URLSearchParams) => {
   return karp;
 };
 
-const filterCategory = (
+const filterCategori = (
   filterCategor: string[],
   tovars: ITovar[]
 ): ITovar[] => {

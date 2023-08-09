@@ -1,21 +1,23 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FilterAndSort, TovarList } from "../components";
-import { Skeleton, Sort, Categories } from "../UI";
+import { Skeleton } from "../UI";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
 import { sortFilterTovars } from "../utils/sortAndFilter";
 import { ITovar } from "../interface/tovar.interface";
 import { useSearchParams } from "react-router-dom";
+import { filterSortSelector } from "../store/FilterSortSlice";
+import { ISort } from "../interface/other.interface";
 
 export const MainPages = () => {
   const [page] = useState<number>(0);
-  const [sort, setSort] = useState({ categor: "id", filterCategory: [] });
   const [categor, setCategory] = useState<string>("id");
   const [filterCategory, setFilterCategory] = useState<string[]>([]);
   const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   // const params = new URLSearchParams(document.location.search);
   const { tovars: allTovars, status } = useAppSelector(tovarsSelector);
+  const filterSort: ISort = useAppSelector(filterSortSelector);
 
   const numberTovarsInPage = 8;
 
@@ -24,11 +26,11 @@ export const MainPages = () => {
     if (allTovars.length == 0) {
       dispatch(tovarsThunk());
     }
-  }, [allTovars.length, dispatch, categor, filterCategory]);
+  }, [allTovars.length, dispatch, filterSort]);
 
   const tovars: ITovar[] = useMemo(
-    () => sortFilterTovars(categor, allTovars, searchParams, filterCategory),
-    [categor, allTovars, searchParams, filterCategory]
+    () => sortFilterTovars(allTovars, searchParams, filterSort),
+    [filterSort, allTovars, searchParams]
   );
   const currentTovars = Math.max(...tovars.map((item) => item.price));
   console.log("main render");
@@ -42,13 +44,7 @@ export const MainPages = () => {
 
   return (
     <>
-      <FilterAndSort
-        categor={categor}
-        setCategory={setCategory}
-        filterCategory={filterCategory}
-        setFilterCategory={setFilterCategory}
-        currentTovars={currentTovars}
-      ></FilterAndSort>
+      <FilterAndSort currentTovars={currentTovars}></FilterAndSort>
       {tovars.length !== 0 ? (
         <>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />

@@ -1,7 +1,7 @@
 export interface IOptions {
   options: IOption[];
-  select: string;
-  setSelect: (value: string) => void;
+  // select: string;
+  // setSelect: (value: string) => void;
 }
 
 interface IOption {
@@ -13,4 +13,9 @@ export interface IType {
   title: "string";
   description: "string";
   category: "string";
+}
+
+export interface ISort {
+  categor: string;
+  filterCategory: string[];
 }

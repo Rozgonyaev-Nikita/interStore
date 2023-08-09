@@ -1,8 +1,15 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useState } from "react";
 import { IOptions } from "../../interface";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import {
+  changeСategory,
+  filterSortSelector,
+} from "../../store/FilterSortSlice";
 
-const Sort: React.FC<IOptions> = ({ options, select, setSelect }) => {
+const Sort: React.FC<IOptions> = ({ options }) => {
+  const dispatch = useAppDispatch();
+  const { categor } = useAppSelector(filterSortSelector);
   return (
     <>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -11,8 +18,8 @@ const Sort: React.FC<IOptions> = ({ options, select, setSelect }) => {
           id="sl"
           data-testid="selectForm"
           name="mySelect"
-          value={select}
-          onChange={(e) => setSelect(e.target.value)}
+          value={categor}
+          onChange={(e) => dispatch(changeСategory(e.target.value))}
           style={{ marginBottom: "20px" }}
         >
           <MenuItem value="id">По умолчанию</MenuItem>
