@@ -35,7 +35,6 @@ const Сategories = () => {
     "Драгоценности",
     "Другое",
   ];
-  console.log("index", filterCategory);
 
   return (
     <div className={classes.wrapper}>

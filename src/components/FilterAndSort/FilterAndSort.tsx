@@ -3,16 +3,16 @@ import { Sort, Categories } from "../../UI";
 import PriceSlider from "../../UI/Categories/PriceSlider";
 
 interface IFilterAndSort {
-  currentTovars: number;
+  maxCurrentPrice: number;
 }
 
 const FilterAndSort: React.FC<IFilterAndSort> = ({
-  currentTovars,
+  maxCurrentPrice,
 }): JSX.Element => {
   return (
     <div>
       <Categories />
-      <PriceSlider currentTovars={currentTovars} />
+      <PriceSlider maxCurrentPric={maxCurrentPrice} />
       <Sort
         options={[
           { value: "title", name: "По заголовку" },

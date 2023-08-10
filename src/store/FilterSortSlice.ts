@@ -12,11 +12,13 @@ const categoriesFilter: string[] = [
 interface ISort {
   categor: string;
   filterCategory: string[];
+  sliderPrice: number | number[];
 }
 
 const initialState: ISort = {
   categor: "id",
   filterCategory: [],
+  sliderPrice: [0, 0],
 };
 
 const filterSortSlice = createSlice({
@@ -26,11 +28,8 @@ const filterSortSlice = createSlice({
     changeСategory(state, action: PayloadAction<string>) {
       state.categor = action.payload;
     },
-    changeFilterCategory(
-      state,
-      action: PayloadAction<number>
-    ) {
-      const index  = action.payload;
+    changeFilterCategory(state, action: PayloadAction<number>) {
+      const index = action.payload;
       const newFilterCategory = [...state.filterCategory]; // создаем копию массива filterCategory
 
       if (newFilterCategory.includes(categoriesFilter[index])) {
@@ -43,10 +42,17 @@ const filterSortSlice = createSlice({
       }
       state.filterCategory = newFilterCategory;
     },
+    changeSliderPrice(state, action: PayloadAction<number | number[]>) {
+      state.sliderPrice = action.payload;
+    },
   },
 });
 
 export const filterSortSelector = (state: RootState) => state.filterSort;
 
-export const { changeСategory, changeFilterCategory } = filterSortSlice.actions;
+export const sliderPriceSelector = (state: RootState) =>
+  state.filterSort.sliderPrice;
+
+export const { changeСategory, changeFilterCategory, changeSliderPrice } =
+  filterSortSlice.actions;
 export default filterSortSlice.reducer;

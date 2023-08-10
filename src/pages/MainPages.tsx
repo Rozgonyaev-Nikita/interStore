@@ -11,11 +11,8 @@ import { ISort } from "../interface/other.interface";
 
 export const MainPages = () => {
   const [page] = useState<number>(0);
-  const [categor, setCategory] = useState<string>("id");
-  const [filterCategory, setFilterCategory] = useState<string[]>([]);
   const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
-  // const params = new URLSearchParams(document.location.search);
   const { tovars: allTovars, status } = useAppSelector(tovarsSelector);
   const filterSort: ISort = useAppSelector(filterSortSelector);
 
@@ -28,11 +25,15 @@ export const MainPages = () => {
     }
   }, [allTovars.length, dispatch, filterSort]);
 
-  const tovars: ITovar[] = useMemo(
+  const {
+    priceSort: tovars,
+    maxPrice,
+  }: { priceSort: ITovar[]; maxPrice: number } = useMemo(
     () => sortFilterTovars(allTovars, searchParams, filterSort),
     [filterSort, allTovars, searchParams]
   );
-  const currentTovars = Math.max(...tovars.map((item) => item.price));
+  const maxCurrentPric = Math.max(...tovars.map((item) => item.price));
+  const maxCurrentPrice = maxCurrentPric !== -Infinity ? maxCurrentPric : 100;
   console.log("main render");
 
   if (status === "pending") {
@@ -44,7 +45,7 @@ export const MainPages = () => {
 
   return (
     <>
-      <FilterAndSort currentTovars={currentTovars}></FilterAndSort>
+      <FilterAndSort maxCurrentPrice={maxPrice}></FilterAndSort>
       {tovars.length !== 0 ? (
         <>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />
