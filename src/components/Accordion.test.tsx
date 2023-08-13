@@ -1,5 +1,5 @@
-import { describe, expect, expectTypeOf, test } from "vitest";
-import { logRoles, render, screen } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
+import { render, screen } from "@testing-library/react";
 import Accordion from "./Accordion";
 
 const data = [

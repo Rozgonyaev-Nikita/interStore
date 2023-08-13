@@ -1,16 +1,9 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
+import React, { useEffect, useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { maxPriceSelector } from "../../store/FetchTovars";
-import {
-  changeSliderPrice,
-  filterSortSelector,
-  sliderPriceSelector,
-} from "../../store/FilterSortSlice";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { changeSliderPrice } from "../../store/FilterSortSlice";
 import debounce from "lodash.debounce";
 
 function valuetext(value: number) {
@@ -24,13 +17,8 @@ interface IPriceSlider {
 const PriceSlider: React.FC<IPriceSlider> = ({ maxCurrentPric }) => {
   const maxCurrentPrice: number =
     maxCurrentPric !== null ? maxCurrentPric : 100;
-  console.log("maxCurrentPrice", maxCurrentPrice);
   const [sliderValue, setSliderValue] = useState([0, maxCurrentPrice]);
-  // const [sliderValue, setSliderValue] = useState([0, maxCurrentPrice]);
   const step = Math.floor(Math.ceil(maxCurrentPrice / 200));
-  // console.log("step", step);
-  console.log("maxCurrentPrice", maxCurrentPrice);
-  // const sliderValueh = useAppSelector(sliderPriceSelector);
 
   const dispatch = useAppDispatch();
   const marks = [
@@ -49,7 +37,7 @@ const PriceSlider: React.FC<IPriceSlider> = ({ maxCurrentPric }) => {
     Math.floor(maxCurrentPrice),
   ];
 
-  const handleSliderChange = (event: Event, value: number | number[]) => {
+  const handleSliderChange = (_event: Event, value: number | number[]) => {
     if (typeof value === "number") {
       setSliderValue([0, value]);
     } else {
@@ -57,25 +45,24 @@ const PriceSlider: React.FC<IPriceSlider> = ({ maxCurrentPric }) => {
     }
     changeRedux(value);
   };
-  const changeRedux = React.useCallback(
-    debounce((value) => {
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const changeRedux = useCallback(
+    debounce((value: number | number[]) => {
       dispatch(changeSliderPrice(value));
     }, 250),
     []
   );
 
-  // console.log("sliderValue", sliderValue);
-  React.useEffect(() => {
+  useEffect(() => {
     setSliderValue([0, maxCurrentPrice]);
     dispatch(changeSliderPrice([0, maxCurrentPrice]));
-  }, [maxCurrentPrice]);
+  }, [maxCurrentPrice, dispatch]);
   return (
     <Box sx={{ width: 250 }}>
-      <h1>
-        {sliderValue[0]} {sliderValue[1]}
-      </h1>
       <Typography id="track-inverted-range-slider" gutterBottom>
-        Inverted track range
+        Цена: ${<span style={{ color: "red" }}>{sliderValue[0]}</span>} до $
+        {<span style={{ color: "red" }}>{sliderValue[1]}</span>}
       </Typography>
       <Slider
         track="inverted"

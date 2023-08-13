@@ -32,8 +32,8 @@ export const MainPages = () => {
     () => sortFilterTovars(allTovars, searchParams, filterSort),
     [filterSort, allTovars, searchParams]
   );
-  const maxCurrentPric = Math.max(...tovars.map((item) => item.price));
-  const maxCurrentPrice = maxCurrentPric !== -Infinity ? maxCurrentPric : 100;
+  // const maxCurrentPric = Math.max(...tovars.map((item) => item.price));
+  // const maxCurrentPrice = maxCurrentPric !== -Infinity ? maxCurrentPric : 100;
   console.log("main render");
 
   if (status === "pending") {

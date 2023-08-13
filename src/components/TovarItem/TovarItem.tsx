@@ -6,7 +6,6 @@ import { FC } from "react";
 import { ITovar } from "../../interface/tovar.interface";
 import noTovar from "../../assets/no_product.jpg";
 import IconButtons from "./IconButtons";
-import classes from "./TovarItem.module.scss";
 
 interface ITovarItem {
   tovar: ITovar;

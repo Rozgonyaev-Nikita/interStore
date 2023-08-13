@@ -61,9 +61,13 @@ const categorySelect = (tovar: ITovar[], categor: string) => {
   }
 };
 
-const sortPrice = (currentTovars: ITovar[], sliderPrice: [number, number]) => {
-  const finalTovars = currentTovars.filter(
-    (item) => item.price >= sliderPrice[0] && item.price <= sliderPrice[1]
-  );
-  return finalTovars;
+const sortPrice = (currentTovars: ITovar[], sliderPrice: number | number[]) => {
+  if (typeof sliderPrice !== "number") {
+    const finalTovars = currentTovars.filter(
+      (item) => item.price >= sliderPrice[0] && item.price <= sliderPrice[1]
+    );
+    return finalTovars;
+  } else {
+    return currentTovars;
+  }
 };

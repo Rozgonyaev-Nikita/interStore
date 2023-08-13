@@ -1,10 +1,8 @@
-import { beforeAll, beforeEach, describe, expect, test, vi } from "vitest";
-import { getByText, render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { describe, expect, test, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
 
 import store from "../../store/index";
 import TovarList from "./TovarList";
-import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";

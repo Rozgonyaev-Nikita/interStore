@@ -1,9 +1,9 @@
 import React, { ChangeEventHandler } from "react";
 
-interface ICompon {
-  onChange: (s: string) => void;
-  value: string;
-}
+// interface ICompon {
+//   onChange: (s: string) => void;
+//   value: string;
+// }
 
 const TestCompon = () => {
   const [text, setText] = React.useState<string>("");

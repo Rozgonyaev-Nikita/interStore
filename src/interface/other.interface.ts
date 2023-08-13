@@ -18,5 +18,5 @@ export interface IType {
 export interface ISort {
   categor: string;
   filterCategory: string[];
-  sliderPrice: [number, number];
+  sliderPrice: number | number[];
 }
