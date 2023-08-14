@@ -7,6 +7,7 @@
 .card {
   padding-right: 30px;
   margin-bottom: 10px;
+  min-height: 160px;
 }
 .card:hover {
   /* padding-right: 30px;
@@ -26,19 +27,71 @@
 .p {
   border-bottom: 4px solid red;
   width: 100%;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 675px) {
   .wrapper {
     width: 100%;
     justify-content: center;
   }
   .card {
     padding-right: 20px;
+    min-height: 175px;
   }
   .img {
-    height: 80px;
+    height: 140px;
+  }
+  .label {
+    font-size: 14px;
+  }
+}
+
+/* @media (max-width: 530px) {
+  .wrapper {
+    width: 100%;
+    justify-content: center;
+  }
+  .card {
+    padding-right: 20px;
+    min-height: 130px;
+  }
+  .img {
+    height: 100px;
+  }
+  .label {
+    font-size: 12px;
+  }
+} */
+
+@media (max-width: 530px) {
+  .wrapper {
+    width: 100%;
+    justify-content: center;
+  }
+  .card {
+    padding-right: 20px;
+    min-height: 130px;
+  }
+  .img {
+    height: 120px;
+  }
+  .label {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 467px) {
+  .wrapper {
+    width: 100%;
+    justify-content: center;
+  }
+  .card {
+    padding-right: 20px;
+    min-height: 130px;
+  }
+  .img {
+    height: 100px;
   }
   .label {
     font-size: 12px;

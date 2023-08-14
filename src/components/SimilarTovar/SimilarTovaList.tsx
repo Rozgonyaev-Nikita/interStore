@@ -17,7 +17,7 @@ const SimilarTovaList: FC<ITovarProps> = ({ tovar }) => {
     try {
       setLoading(true);
       const { data } = await axios.get<ITovar[]>(
-        `https://fakestoreapi.com/products/category/${tovar.category}?limit=3`
+        `https://fakestoreapi.com/products/category/${tovar.category}?limit=4`
       );
       console.log("tovпр", data);
       setSimTovars(data);

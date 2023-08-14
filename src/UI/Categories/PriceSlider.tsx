@@ -16,7 +16,9 @@ interface IPriceSlider {
 
 const PriceSlider: React.FC<IPriceSlider> = ({ maxCurrentPric }) => {
   const maxCurrentPrice: number =
-    maxCurrentPric !== null ? maxCurrentPric : 100;
+    maxCurrentPric !== null && maxCurrentPric !== -Infinity
+      ? maxCurrentPric
+      : 100;
   const [sliderValue, setSliderValue] = useState([0, maxCurrentPrice]);
   const step = Math.floor(Math.ceil(maxCurrentPrice / 200));
 
@@ -59,7 +61,7 @@ const PriceSlider: React.FC<IPriceSlider> = ({ maxCurrentPric }) => {
     dispatch(changeSliderPrice([0, maxCurrentPrice]));
   }, [maxCurrentPrice, dispatch]);
   return (
-    <Box sx={{ width: 250 }}>
+    <Box sx={{ width: 250, marginLeft: "20px" }}>
       <Typography id="track-inverted-range-slider" gutterBottom>
         Цена: ${<span style={{ color: "red" }}>{sliderValue[0]}</span>} до $
         {<span style={{ color: "red" }}>{sliderValue[1]}</span>}

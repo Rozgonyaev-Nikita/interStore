@@ -6,6 +6,7 @@ import { FC } from "react";
 import { ITovar } from "../../interface/tovar.interface";
 import noTovar from "../../assets/no_product.jpg";
 import IconButtons from "./IconButtons";
+import classes from "./TovarItem.module.scss";
 
 interface ITovarItem {
   tovar: ITovar;
@@ -15,7 +16,7 @@ interface ITovarItem {
 
 const TovarItem: FC<ITovarItem> = ({ tovar, setOpen, isFull = true }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} className={classes.card}>
       <CardMedia
         sx={{
           height: 140,

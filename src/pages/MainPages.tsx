@@ -11,14 +11,19 @@ import { ISort } from "../interface/other.interface";
 
 export const MainPages = () => {
   const [page] = useState<number>(0);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const { tovars: allTovars, status } = useAppSelector(tovarsSelector);
   const filterSort: ISort = useAppSelector(filterSortSelector);
 
   const numberTovarsInPage = 8;
 
-  // console.log("filtercateg", filterCategory);
+  const removeParams = () => {
+    searchParams.delete("karp");
+
+    setSearchParams(searchParams);
+  };
+
   useEffect(() => {
     if (allTovars.length == 0) {
       dispatch(tovarsThunk());
@@ -32,8 +37,6 @@ export const MainPages = () => {
     () => sortFilterTovars(allTovars, searchParams, filterSort),
     [filterSort, allTovars, searchParams]
   );
-  // const maxCurrentPric = Math.max(...tovars.map((item) => item.price));
-  // const maxCurrentPrice = maxCurrentPric !== -Infinity ? maxCurrentPric : 100;
   console.log("main render");
 
   if (status === "pending") {
@@ -45,16 +48,11 @@ export const MainPages = () => {
 
   return (
     <>
+      <button onClick={removeParams}>Очистить поиск</button>
       <FilterAndSort maxCurrentPrice={maxPrice}></FilterAndSort>
       {tovars.length !== 0 ? (
         <>
           <TovarList tovars={tovars} page={page} ntip={numberTovarsInPage} />
-          {/* <PaginationC
-            tovars={tovars}
-            page={page}
-            setPage={setPage}
-            ntip={numberTovarsInPage}
-          /> */}
         </>
       ) : (
         <div>Корзина пуста</div>
