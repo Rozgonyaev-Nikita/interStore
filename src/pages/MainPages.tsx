@@ -3,11 +3,12 @@ import { FilterAndSort, TovarList } from "../components";
 import { Skeleton } from "../UI";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { tovarsSelector, tovarsThunk } from "../store/FetchTovars";
-import { sortFilterTovars } from "../utils/sortAndFilter";
+// import { sortFilterTovars } from "../utils/sortAndFilter"; 1232141245
 import { ITovar } from "../interface/tovar.interface";
 import { useSearchParams } from "react-router-dom";
 import { filterSortSelector } from "../store/FilterSortSlice";
 import { ISort } from "../interface/other.interface";
+import { useSortFilterTovars } from "../utils/sortAndFilter";
 
 export const MainPages = () => {
   const [page] = useState<number>(0);
@@ -30,12 +31,10 @@ export const MainPages = () => {
     }
   }, [allTovars.length, dispatch, filterSort]);
 
-  const {
-    priceSort: tovars,
-    maxPrice,
-  }: { priceSort: ITovar[]; maxPrice: number } = useMemo(
-    () => sortFilterTovars(allTovars, searchParams, filterSort),
-    [filterSort, allTovars, searchParams]
+  const { priceSort: tovars, maxPrice } = useSortFilterTovars(
+    allTovars,
+    searchParams,
+    filterSort
   );
   console.log("main render");
 

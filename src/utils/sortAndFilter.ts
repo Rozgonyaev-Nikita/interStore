@@ -1,21 +1,56 @@
+import { useMemo } from "react";
 import { ISort, IType } from "../interface/other.interface";
 import { ITovar } from "../interface/tovar.interface";
 
-export const sortFilterTovars = (
+// export const sortFilterTovars = (
+//   allTovars: ITovar[],
+//   searchParams: URLSearchParams,
+//   filterSort: ISort
+// ): { priceSort: ITovar[]; maxPrice: number } => {
+//   const { categor, filterCategory, sliderPrice } = filterSort;
+//   const stage1 = findFilter(allTovars, searchParams);
+//   const tovar = filterCategori(filterCategory, stage1);
+//   const categorSelect = categorySelect(tovar, categor);
+//   const priceSort = sortPrice(categorSelect, sliderPrice);
+
+//   const maxPrice = Math.max(...categorSelect.map((item) => item.price));
+
+//   return { priceSort, maxPrice };
+// };
+
+export const useSortFilterTovars = (
   allTovars: ITovar[],
   searchParams: URLSearchParams,
   filterSort: ISort
-): { priceSort: ITovar[]; maxPrice: number } => {
-  const { categor, filterCategory, sliderPrice } = filterSort;
-  const stage1 = findFilter(allTovars, searchParams);
-  const tovar = filterCategori(filterCategory, stage1);
-  const categorSelect = categorySelect(tovar, categor);
-  const priceSort = sortPrice(categorSelect, sliderPrice);
+) => {
+  const filterSortTovars = useMemo((): {
+    priceSort: ITovar[];
+    maxPrice: number;
+  } => {
+    const { categor, filterCategory, sliderPrice } = filterSort;
+    const stage1 = findFilter(allTovars, searchParams);
+    const tovar = filterCategori(filterCategory, stage1);
+    const categorSelect = categorySelect(tovar, categor);
+    const priceSort = sortPrice(categorSelect, sliderPrice);
 
-  const maxPrice = Math.max(...categorSelect.map((item) => item.price));
+    const maxPrice = Math.max(...categorSelect.map((item) => item.price));
 
-  return { priceSort, maxPrice };
+    return { priceSort, maxPrice };
+  }, [filterSort, allTovars, searchParams]);
+  return filterSortTovars;
 };
+// useMemo((allTovars: ITovar[], searchParams: URLSearchParams, filterSort: ISort)
+//  : { priceSort: ITovar[]; maxPrice: number } => {
+//   const { categor, filterCategory, sliderPrice } = filterSort;
+//   const stage1 = findFilter(allTovars, searchParams);
+//   const tovar = filterCategori(filterCategory, stage1);
+//   const categorSelect = categorySelect(tovar, categor);
+//   const priceSort = sortPrice(categorSelect, sliderPrice);
+
+//   const maxPrice = Math.max(...categorSelect.map((item) => item.price));
+
+//   return { priceSort, maxPrice };
+// }, [])
 
 const findFilter = (allTovars: ITovar[], searchParams: URLSearchParams) => {
   let karp;

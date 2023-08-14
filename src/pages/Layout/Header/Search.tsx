@@ -9,7 +9,7 @@ interface ISearch extends URLSearchParams {
 }
 
 export const SearchInp = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   const searchDeboubce = debounce(
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
