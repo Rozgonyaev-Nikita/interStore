@@ -1,22 +1,49 @@
-.div{
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    width: 200px;
-    background-color: rgb(230, 230, 230);
+.div {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 200px;
+  background-color: rgb(230, 230, 230);
+}
+.item {
+  margin: 10px 10px 10px 10px;
+
+  border: 1px solid black;
+  background-color: #333;
 }
 
-.cartBaskTovar{
-    border: 1px solid black;
-    margin: 10px 20px 10px 10px;
-    line-height: 24px;
-    width: auto;
-    background-color: #333;
-    color: #ddd;
+.cartBaskTovar {
+  margin-bottom: 10px;
+  padding: 10px 5px 10px 10px;
+  line-height: 24px;
+  width: auto;
+  color: #ddd;
+  display: flex;
+  align-items: center;
 }
 
-.deleteIcon :hover{
-    scale: 1.1;
-    fill: red;
+.deleteIcon :hover {
+  scale: 1.1;
+  fill: red;
+}
+
+.imgTovar {
+  height: 60px;
+  margin-right: 10px;
+  padding-top: 10px;
+}
+.title {
+  margin-block: 10px;
+  margin-right: 15px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price {
+  margin: -20px 0 0 65px;
+  color: white;
 }

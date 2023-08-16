@@ -64,15 +64,33 @@ export const BasketSide: FC<IDrawer> = ({ open, onClose }): JSX.Element => {
           tovars.map((tovar) => (
             <ListItem
               key={tovar.id}
-              className={classes.cartBaskTovar}
-              sx={{ width: "auto", justifyContent: "space-between" }}
+              className={classes.item}
+              sx={{
+                width: "auto",
+                justifyContent: "space-between",
+                display: "block",
+              }}
             >
-              <h2 className="post--title">{tovar.title}</h2>
-              <p>{tovar.count}</p>
-              <DeleteOutlineOutlined
-                onClick={() => dispatch(DeleteProduct(tovar.id))}
-                className={classes.deleteIcon}
-              />
+              <div className={classes.cartBaskTovar}>
+                <img
+                  className={classes.imgTovar}
+                  src={tovar.image}
+                  alt="Товар"
+                />
+                <h2 className={classes.title}>{tovar.title}</h2>
+                <p>{tovar.count}</p>
+                <DeleteOutlineOutlined
+                  onClick={() => dispatch(DeleteProduct(tovar.id))}
+                  className={classes.deleteIcon}
+                />
+              </div>
+              <p className={classes.price}>
+                Цена за <span style={{ color: "red" }}>{tovar.count}</span>{" "}
+                товара:{" "}
+                <span style={{ color: "red" }}>
+                  {tovar.price * tovar.count}$
+                </span>
+              </p>
             </ListItem>
           ))
         ) : (

@@ -6,3 +6,4 @@ export { default as AddTovar } from "./AddTovar/AddTovar";
 export { default as Accordion } from "./Accordion";
 export { default as TestCompon } from "./TestCompon";
 export { default as FilterAndSort } from "./FilterAndSort/FilterAndSort";
+export { default as VoidTovars } from "./VoidTovars/VoidTovars";
