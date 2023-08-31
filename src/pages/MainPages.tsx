@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { FilterAndSort, TovarList, VoidTovars } from "../components";
 import { Skeleton } from "../UI";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
@@ -29,6 +29,7 @@ export const MainPages = () => {
     filterSort
   );
   console.log("main render");
+  console.log("tov", tovars);
 
   if (status === "pending") {
     return <Skeleton count={numberTovarsInPage}></Skeleton>;

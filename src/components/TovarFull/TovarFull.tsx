@@ -10,6 +10,7 @@ interface ITovartProps {
 
 const ProductFull: FC<ITovartProps> = ({ tovar }) => {
   const { title, description, price, image, rating } = tovar;
+  console.log("rating", rating);
   console.log(tovar);
 
   return (
@@ -27,7 +28,7 @@ const ProductFull: FC<ITovartProps> = ({ tovar }) => {
             <Rating
               name="half-rating-read"
               defaultValue={2.5}
-              value={rating?.rate ? rating.rate : 1}
+              value={rating !== undefined ? rating.rate : 1}
               precision={0.1}
               readOnly
               style={{ verticalAlign: "middle" }}
@@ -39,7 +40,7 @@ const ProductFull: FC<ITovartProps> = ({ tovar }) => {
                 marginLeft: "10px",
               }}
             >
-              {rating?.count ? rating.count : 1} оценок
+              {rating !== undefined ? rating.count : 1} оценок
             </p>
             <h2>{Math.round((price * 85) / 10) * 10} &#x20bd;</h2>
             <p>{description}</p>

@@ -11,6 +11,9 @@ import { useAppSelector } from "../../../hooks/reduxHooks";
 import { SearchInp } from "./Search";
 import { Menu } from "../../../UI";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Avatar } from "@mui/material";
+import avatar from "../../../assets/avatar.png";
+import men from "../../../assets/mensClothing.jpg";
 
 export const Header = () => {
   const [isOpenBasket, setOpenBasket] = useState<boolean>(false);
@@ -36,7 +39,11 @@ export const Header = () => {
         <AppBar position="static">
           <Toolbar>
             <Menu />
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, marginLeft: "2%" }}
+            >
               Типо сайт
             </Typography>
             <SearchInp />
@@ -69,6 +76,9 @@ export const Header = () => {
               <Badge badgeContent={countAllTovars} color="secondary">
                 <ShoppingBasket color="action" />
               </Badge>
+            </IconButton>
+            <IconButton size="large" sx={{ p: 0, marginLeft: "10px" }}>
+              <Avatar alt="Remy Sharp" src={men || avatar} />
             </IconButton>
           </Toolbar>
         </AppBar>

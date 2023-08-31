@@ -17,7 +17,8 @@ const SimilarTovaList: FC<ITovarProps> = ({ tovar }) => {
     try {
       setLoading(true);
       const { data } = await axios.get<ITovar[]>(
-        `https://fakestoreapi.com/products/category/${tovar.category}?limit=4`
+        // `https://fakestoreapi.com/products/category/${tovar.category}?limit=4`
+        `http://localhost:5000/category/${tovar.category}/4`
       );
       console.log("tovпр", data);
       setSimTovars(data);
@@ -27,7 +28,7 @@ const SimilarTovaList: FC<ITovarProps> = ({ tovar }) => {
       console.log("Плоха с сервером!");
     }
   };
-
+  console.log("simtv", simTovars);
   useEffect(() => {
     getSimilarTovars();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,7 +44,7 @@ const SimilarTovaList: FC<ITovarProps> = ({ tovar }) => {
 
   return (
     <>
-      {simTovars && (
+      {simTovars ? (
         <>
           <div>
             <h2>Похожие товары</h2>
@@ -58,6 +59,8 @@ const SimilarTovaList: FC<ITovarProps> = ({ tovar }) => {
             </div>
           </div>
         </>
+      ) : (
+        <h2>Похожих товаров нет</h2>
       )}
     </>
   );

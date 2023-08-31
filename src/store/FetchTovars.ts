@@ -4,9 +4,7 @@ import { ITovar } from "../interface/tovar.interface";
 import { RootState } from ".";
 
 export const tovarsThunk = createAsyncThunk("tovars/getTovars", async () => {
-  const { data } = await axios.get<ITovar[]>(
-    `https://fakestoreapi.com/products`
-  );
+  const { data } = await axios.get<ITovar[]>(`http://localhost:5000/`);
   return data;
 });
 
@@ -15,16 +13,19 @@ export const tovarsThunkPost = createAsyncThunk(
   async (tovar: ITovar, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.post<ITovar>(
-        `https://fakestoreapi.com/products`,
+        `http://localhost:5000/addProduct`,
         {
+          id: Date.now(),
           title: tovar.title,
           price: tovar.price,
           description: tovar.description,
           // image: "https://i.pravatar.cc",
           category: tovar.category,
+          rating: { rate: 0, count: 0 },
         }
       );
-      console.log("dgkarp", tovar);
+      console.log("tovar", tovar);
+      console.log("dgkarp", data);
       dispatch(addTovar(data));
     } catch (error) {
       return rejectWithValue(error);

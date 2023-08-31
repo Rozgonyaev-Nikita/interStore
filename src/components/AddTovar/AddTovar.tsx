@@ -40,9 +40,14 @@ const AddTovar = () => {
 
   const dispatch = useAppDispatch();
 
-  const addNewTovar = () => {
-    // const newTovar = tovar;
-
+  const addNewTovar = async () => {
+    console.log("tovar", tovar);
+    // const { data } = await axios.post(
+    //   "http://localhost:5000/addProduct",
+    //   tovar
+    // );
+    console.log("sdja;rej");
+    // console.log(karp);
     dispatch(tovarsThunkPost(tovar));
     console.log("nwtv", tovar);
   };

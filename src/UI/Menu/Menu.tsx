@@ -56,7 +56,7 @@ const MenuC = () => {
         }}
       >
         <MenuItem onClick={handleClose1}>Добавить товар</MenuItem>
-        <MenuItem onClick={handleClose}>В разработке</MenuItem>
+        <MenuItem onClick={handleClose}>Пока не придумал</MenuItem>
         <MenuItem onClick={handleClose3}>Летающий карп</MenuItem>
       </Menu>
       <MyModal setOpen={setOpenModal} isOpen={isOpenModal}>
