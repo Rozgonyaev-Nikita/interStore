@@ -4,7 +4,9 @@ import { ITovar } from "../interface/tovar.interface";
 import { RootState } from ".";
 
 export const tovarsThunk = createAsyncThunk("tovars/getTovars", async () => {
-  const { data } = await axios.get<ITovar[]>(`http://localhost:5000/`);
+  const { data } = await axios.get<ITovar[]>(
+    `https://karpbackend123.onrender.com/`
+  );
   return data;
 });
 
@@ -13,7 +15,7 @@ export const tovarsThunkPost = createAsyncThunk(
   async (tovar: ITovar, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.post<ITovar>(
-        `http://localhost:5000/addProduct`,
+        `https://karpbackend123.onrender.com/addProduct`,
         {
           id: Date.now(),
           title: tovar.title,
